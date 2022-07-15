@@ -11,6 +11,8 @@ const Wrapper = styled.div`
    justify-content: space-between;
    background-color: black; 
    box-shadow: 0 5px 13px -5px #000000;
+   margin-bottom: 5px;
+   //opacity: 0;
 `
 
 const Left = styled.div`
@@ -71,7 +73,7 @@ const Search = styled.input`
    background-color: black;
    color: #d32f2f;
    text-align: center;
-
+   font-size: 16px;
    &:focus{
       outline: none;
    }
@@ -84,6 +86,11 @@ const Search = styled.input`
    &:focus::placeholder{
       color: transparent;
    }
+`
+const WhiteDiv = styled.div`
+   width: 100%;
+   height: 5px;
+   background-color: white;
 `
 
 
@@ -118,6 +125,7 @@ const Navbar = () => {
             </RightItem>
          </Right>
       </Wrapper>  
+
     
   )
 }
