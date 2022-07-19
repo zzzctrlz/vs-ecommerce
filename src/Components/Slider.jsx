@@ -1,6 +1,8 @@
 import {slides} from "../data";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { NavigateBefore, NavigateNext } from "@mui/icons-material";
+
 
 
 const Container = styled.div`
@@ -63,7 +65,7 @@ const TextWrapper = styled.div`
    //width: 100%; doesn't work for slide not filling wrapper
    //max-width: 550px; doesn't work for slide not filling wrapper
    min-width: 600px; // also "fixes" slide not filling wrapper width but now it won't dynamically shrink so would also need multiple breakpoints/media queries just like the padding solution...
-
+   padding: 0 50px;
 `
 const CircleContainer = styled.div`
    display: flex;
@@ -80,32 +82,75 @@ const Circle = styled.div`
    width: 20px;
    cursor: pointer;
 `
+const LeftArrow = styled.div`
+  cursor: pointer;
+
+  &:hover{
+   color: #d32f2f;
+  }
+`
+const RightArrow = styled.div`
+   cursor: pointer;
+   &:hover{
+   color: #d32f2f;
+   }
+`
+const H1 = styled.h1`
+   font-size: 60px;
+   font-weight: 700;
+`
+const P = styled.p`
+   font-size: 30px;
+   font-weight: 500;
+`
+
 
 const Slider = () => {
    const [slideIndex, setSlideIndex] = useState(0);
-
+   useEffect(()=>{
+      let circles = document.querySelectorAll(Circle);
+      circles.forEach((value,index)=>{   
+         if(index === slideIndex){value.style.backgroundColor = "#d32f2f"}
+         else{value.style.backgroundColor = "black"}
+      })
+   }, [slideIndex]);
+   
    //should i put the following into a useEffect body?
-  /* useEffect(()=>{
+  /* 
+   useEffect(()=>{
       const slideChange = setInterval(()=>{
         setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
       }, 5000);
-   },);*/
+   },);
+   //caused weird glitchy changes. temporarily disabled*/ 
    
 
    const handleCircleClick = (circleNum) => {
       setSlideIndex(circleNum);
-      let circles = document.querySelectorAll(Circle);
-      circles.forEach((value,index)=>{
-         
-         if(index === circleNum){value.style.backgroundColor = "#d32f2f"}
-         else{value.style.backgroundColor = "black"}
-         
-      })
+      }
+
+
+   const handleArrowClick = (direction) => {
+      if(direction ==="left"){setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2)}
+      else{setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0)}
    }
+/* //moved code to anonymous function body of useEffect because setState within a 
+   //closure (function inside function) only has access to old state value kind of
+   //like an async function but with more limitations like cant use await or settimeout
+   const handleCircleColor = () =>{
+      let circles = document.querySelectorAll(Circle);
+      circles.forEach((value,index)=>{   
+         if(index === slideIndex){value.style.backgroundColor = "#d32f2f"}
+         else{value.style.backgroundColor = "black"}
+      }) 
+   }*/
 
 
   return (
    <Container>
+
+      <LeftArrow onClick={()=> handleArrowClick("left")}><NavigateBefore fontSize="large"/></LeftArrow>
+
       <Wrapper>
          {slides.map((item)=> (
          <Slide slideIndex ={slideIndex}>
@@ -114,14 +159,15 @@ const Slider = () => {
             </ImgWrapper>
 
             <TextWrapper>
-               
-               <h1>{item.engTitle}</h1>
-               <p>{item.engText}</p>
-               
+               <H1>{item.engTitle}</H1>
+               <P>{item.engText}</P>
             </TextWrapper>
          </Slide>   
          ))}
       </Wrapper>
+
+      <RightArrow onClick={()=> handleArrowClick("right")}><NavigateNext fontSize="large" /></RightArrow>
+
       <CircleContainer>
          <Circle id="0" onClick={()=> handleCircleClick(0)}></Circle>
          <Circle id="1" onClick={()=> handleCircleClick(1)}></Circle>

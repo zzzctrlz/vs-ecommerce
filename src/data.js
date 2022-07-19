@@ -21,8 +21,7 @@ export const slides = [
    img: "https://i.imgur.com/9lI8fvv.jpg",
    alt: "viet noodle soup bowl",
    engTitle: "Hello!",
-   //engText: "Have you eaten yet, friend?",
-   engText: "bloopityalkfeahdlfeahfelajfelk",
+   engText: "Have you eaten yet, friend?",
    vietTitle: "Xin Chào!",
    vietText: "Bạn ăn cơm chưa?"
 },
@@ -31,7 +30,7 @@ export const slides = [
    id: 1,
    img: "https://i.imgur.com/7Jfe6pf.jpg",
    alt: "viet alley",
-   engTitle: "Vietnamese-American Culture", 
+   engTitle: "Vietnamese -American Culture", 
    engText: "Media, merch, & much more!",
    vietTitle: "dljfalekjfalke;jfae",
    vietText: "kjf;lajflkejalfejflakejf",

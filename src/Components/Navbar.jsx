@@ -36,7 +36,8 @@ const Right = styled.div`
    justify-content: flex-end;
 `
 const Title = styled.h1`
-   color: #d32f2f;
+  // color: #d32f2f;
+   color: white;
    font-weight: 700;
 `
 const RightItem = styled.div`

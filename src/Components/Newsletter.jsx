@@ -26,7 +26,7 @@ const InputContainer = styled.div`
    height: 40px;
    background-color: white;
    justify-content: space-between;
-   border: 2px solid #d32f2f;
+   //border: 2px solid #d32f2f;
 `
 const Input = styled.input`
 flex: 9;
