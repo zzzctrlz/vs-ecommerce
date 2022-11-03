@@ -107,6 +107,8 @@ const P = styled.p`
 
 const Slider = () => {
    const [slideIndex, setSlideIndex] = useState(0);
+
+   //useEffect to change circle color when slideIndex changes
    useEffect(()=>{
       let circles = document.querySelectorAll(Circle);
       circles.forEach((value,index)=>{   
