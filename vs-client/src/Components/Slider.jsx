@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 
-
-
 const Container = styled.div`
    width: 100%;
    height: 88vh;
@@ -13,16 +11,11 @@ const Container = styled.div`
    align-items: center;
    position: relative;
    padding-bottom: 15px;
-   //background-color: #2e2e2e;
-   //background-color: white;
 `
 const Wrapper = styled.div`
    height: 90%;
    width: 95%;
    background-color: black;
-   //position: relative;
-   //background-color: yellow; for testing
-   //border: 2px solid red;
    display: flex;
    align-items: center;
    justify-content: flex-start;
@@ -37,20 +30,15 @@ const Wrapper = styled.div`
      justify-content: center;
      transform: translateX(${(props) => props.slideIndex * -100}%);
      transition: all 1s ease;
-     //border: solid 1px white;
-     //overflow: hidden;
   `
 
-const ImgWrapper = styled.div`
+  const ImgWrapper = styled.div`
    flex: 1 1 auto;
    height: 100%;
    overflow: hidden;
    //padding: 20px 20px;
    background-color: orange;
-`
-//const Img = styled.img`
-  /* object-fit: cover;*/
-//`
+  `
 
 const TextWrapper = styled.div`
    flex: 1 1 0; //setting flex basis to a larger size doesn't fix slide not filling wrapper problem. it just expands into the imagewrapper area. setting fb to 0 also doesn't fix. 
@@ -107,6 +95,7 @@ const P = styled.p`
 
 const Slider = () => {
    const [slideIndex, setSlideIndex] = useState(0);
+   let autoSlideChange;
 
    //useEffect to change circle color when slideIndex changes
    useEffect(()=>{
@@ -116,25 +105,22 @@ const Slider = () => {
          else{value.style.backgroundColor = "black"}
       })
    }, [slideIndex]);
-   
-   //should i put the following into a useEffect body?
-  /* 
-   useEffect(()=>{
-      const slideChange = setInterval(()=>{
-        setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
-      }, 5000);
-   },);
-   //caused weird glitchy changes. temporarily disabled*/ 
-   
 
+   //change slide every 8 seconds by updating slideIndex which will trigger useEffect with slideIndex dependency
+   useEffect(()=>{
+      autoSlideChange = setInterval(()=> {setSlideIndex(slideIndex=>slideIndex < 2 ? slideIndex + 1 : 0)}, 8000)
+   }, []);
+  
+ 
    const handleCircleClick = (circleNum) => {
       setSlideIndex(circleNum);
-      }
-
+      clearInterval(autoSlideChange);
+   }
 
    const handleArrowClick = (direction) => {
-      if(direction ==="left"){setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2)}
-      else{setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0)}
+      if(direction ==="left"){setSlideIndex(slideIndex=>slideIndex > 0 ? slideIndex - 1 : 2)}
+      else{setSlideIndex(slideIndex=>slideIndex < 2 ? slideIndex + 1 : 0)}
+      clearInterval(autoSlideChange);
    }
 /* //moved code to anonymous function body of useEffect because setState within a 
    //closure (function inside function) only has access to old state value kind of
@@ -179,7 +165,5 @@ const Slider = () => {
    
   );
 };
-
-
 
 export default Slider
