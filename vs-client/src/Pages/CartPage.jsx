@@ -91,7 +91,7 @@ const Price=styled.p`
 `
 
 
-const Cart = () => {
+const CartPage = () => {
   return (
     <Container>
       <Announcement />
@@ -144,4 +144,4 @@ const Cart = () => {
   )
 }
 
-export default Cart
+export default CartPage

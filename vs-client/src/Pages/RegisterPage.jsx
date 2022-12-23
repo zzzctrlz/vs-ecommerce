@@ -53,7 +53,7 @@ const Button = styled.button`
 `
 
 
-const Register = () => {
+const RegisterPage = () => {
   return (
     <div>
       <Container>
@@ -76,4 +76,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default RegisterPage

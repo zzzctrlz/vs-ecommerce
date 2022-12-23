@@ -47,7 +47,7 @@ const Button = styled.button`
 `
 
 
-const Login = () => {
+const LoginPage = () => {
   return (
     <div>
       <Container>
@@ -64,4 +64,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default LoginPage

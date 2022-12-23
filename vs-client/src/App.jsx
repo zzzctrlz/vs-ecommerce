@@ -1,9 +1,9 @@
-import Homepage from './Pages/Homepage';
-import Login from './Pages/Login';
-import Register from './Pages/Register';
+import HomePage from './Pages/HomePage';
+import LoginPage from './Pages/LoginPage';
+import RegisterPage from './Pages/RegisterPage';
 import ProductPage from './Pages/ProductPage';
 import ProductsPage from './Pages/ProductsPage';
-import Cart from './Pages/Cart';
+import CartPage from './Pages/CartPage';
 
 import{
    BrowserRouter,

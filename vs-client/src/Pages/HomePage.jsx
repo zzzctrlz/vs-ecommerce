@@ -6,7 +6,7 @@ import Newsletter from "../Components/Newsletter"
 import Slider from "../Components/Slider"
 
 
-const Homepage = () => {
+const HomePage = () => {
   return (
     <div>
       <Announcement />
@@ -19,4 +19,4 @@ const Homepage = () => {
   )
 }
 
-export default Homepage
+export default HomePage
