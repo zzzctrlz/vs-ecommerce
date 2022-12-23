@@ -14,4 +14,16 @@ const ProductSchema = new mongoose.Schema(
    {timestamps: true}
 );
 
+/*template
+{
+"title" : "hat 2",
+"desc": "hat with 2",
+"img": "https://i.imgur.com/N8JBDIh.jpeg",
+"size": ["oneSize"],
+"color": ["red", "black", "white"],
+"price": 20,
+"inStock": true,
+"cat": ["men", "women", "other", "child"]
+}
+*/
 module.exports = mongoose.model("Product", ProductSchema);
