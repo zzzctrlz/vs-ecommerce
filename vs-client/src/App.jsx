@@ -1,44 +1,52 @@
 import HomePage from './Pages/HomePage';
-import LoginPage from './Pages/LoginPage';
 import RegisterPage from './Pages/RegisterPage';
-import ProductPage from './Pages/ProductPage';
+import LoginPage from './Pages/LoginPage';
 import ProductsPage from './Pages/ProductsPage';
+import ProductPage from './Pages/ProductPage';
 import CartPage from './Pages/CartPage';
+import SuccessPage from ".Pages/SuccessPage";
 
 import{
    BrowserRouter,
    Switch,
    Route,
+   Redirect,
 } from "react-router-dom";
 
-const App = () => {
-  
-  //const user = null;
+import {useSelector} from "react-redux";
 
+
+
+
+const App = () => {
+   const user = useSelector((state)=>state.user.currentUser);
+  //const user = null;
   return (
       <BrowserRouter>
          <Switch>
             <Route exact path="/" >
-               <Homepage />
+               <HomePage />
             </Route>
-            <Route path="/products">
+            <Route path="/register">
+               {user ? <Redirect to="/" /> : <RegisterPage />}   
+            </Route>
+            <Route path="/login">
+               {user ? <Redirect to="/" /> : <LoginPage />}   
+            </Route>
+            <Route path="/products/:category">
                <ProductsPage />   
             </Route>
-            <Route path="/product">
+            <Route path="/product/:id">
                <ProductPage />
             </Route>
             <Route path="/cart">
-               <Cart />   
+               <CartPage />   
             </Route>
-            <Route path="/login">
-               <Login />   
-            </Route>
-            <Route path="/register">
-               <Register />   
+            <Route path="/success">
+               <SuccessPage />
             </Route>
          </Switch>
-      </BrowserRouter>
-      
+      </BrowserRouter> 
   );
 };
 
