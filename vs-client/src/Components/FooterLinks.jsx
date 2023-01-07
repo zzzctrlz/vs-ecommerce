@@ -83,4 +83,4 @@ const FooterLinks = () => {
   )
 }
 
-export default FooterLinks
+export default FooterLinks;

@@ -1,9 +1,9 @@
 import styled from "styled-components"
-//import {tshirtClipart} from '../data'
+import {Link} from "react-router-dom";
+
 
 const Container = styled.div`
    flex: 1 1 22%;
-   //margin: 5px;
    //width: 400px;
    min-width: 280px;
    height: 375px;
@@ -21,12 +21,14 @@ const Img = styled.img`
 `
 
 
-const Product = ({ itemProp }) => {
+const Product = ({ item }) => {
   return (
     <Container>
-      <Img src= {itemProp.img} alt={itemProp.alt} />
+      <Link to={`/product/${item._id}`}>
+         <Img src= {item.img} alt={item.desc} />
+      </Link>
     </Container>
-  )
-}
+  );
+};
 
 export default Product;

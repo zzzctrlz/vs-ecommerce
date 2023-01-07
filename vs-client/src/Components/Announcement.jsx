@@ -14,6 +14,6 @@ const Announcement = () => {
   return (
     <Wrapper>Grand Opening Sale! Everything 6.9% Off!</Wrapper>
   )
-}
+};
 
 export default Announcement
