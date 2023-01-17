@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { products } from "../data";
+//import { products } from "../data";
 import Product from "./Product";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
 const Container = styled.div`
-   padding: 22px 20px 30px 20px;
+  // padding: 22px 20px 30px 20px;
    display: flex;
    gap: 10px;
    flex-wrap: wrap;
@@ -15,7 +15,7 @@ const Container = styled.div`
 `
 const Products = ({cat, filters, sort}) => {
    const [products, setProducts] = useState([]);
-   const [filteredProducts, setFilteredProducts] = useState([]);
+   //const [filteredProducts, setFilteredProducts] = useState([]);
 
    //initial get/setProducts (with or without category)
    useEffect(()=>{
@@ -26,13 +26,14 @@ const Products = ({cat, filters, sort}) => {
                    : `http://localhost:5000/api/products`
             );
             setProducts(res.data);
+            //console.log(products);
 
          } catch(err){console.log(err)}
       };
       getAndSetProducts();
-   },[cat]);
+   },[cat, products]);
 
-   
+   /*
    //handle filters
    useEffect(()=>{
       //why would there have to be a category to filter products?
@@ -86,16 +87,18 @@ const Products = ({cat, filters, sort}) => {
          }
       }
    },[filters, sort]);
-
+ */
    return (
       <Container>
-      
-         {Object.entries(filters).length > 0 ?  //originally 'cat ?' makes no sense
-              filteredProducts.map((item)=> <Product item={item} key={item.id} />)
-            : products.map((item)=><Product item={item} key={item.id} />) 
-         } 
+        {products.map((item)=> <Product item={item} key={item.id} />)}
       </Container>
    );
+   
+  /* console.log(filters);
+   {Object.entries(filters).length > 0 ?  //originally 'cat ?' makes no sense
+        filteredProducts.map((item)=> <Product item={item} key={item.id} />)
+      : products.map((item)=><Product item={item} key={item.id} />) 
+   } */
 };
 
 export default Products;

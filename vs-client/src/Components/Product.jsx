@@ -12,12 +12,16 @@ const Container = styled.div`
    justify-content: center;
    background-color: black;
    border: 2px solid red;
+   overflow: hidden;
    //margin: 10 px;
    //flex: 0 1 25%;
    `
 const Img = styled.img`
-   height: 75%;  
+   //height: 75%;  
+   height: 375px;
+   width: auto;
    cursor: pointer;
+   object-fit: contain;
 `
 
 

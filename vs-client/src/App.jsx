@@ -4,7 +4,7 @@ import LoginPage from './Pages/LoginPage';
 import ProductsPage from './Pages/ProductsPage';
 import ProductPage from './Pages/ProductPage';
 import CartPage from './Pages/CartPage';
-import SuccessPage from ".Pages/SuccessPage";
+import SuccessPage from "./Pages/SuccessPage";
 
 import{
    BrowserRouter,
@@ -33,10 +33,10 @@ const App = () => {
             <Route path="/login">
                {user ? <Redirect to="/" /> : <LoginPage />}   
             </Route>
-            <Route path="/products/:category">
+            <Route path="/products/:category?">
                <ProductsPage />   
             </Route>
-            <Route path="/product/:id">
+            <Route path="/product/:id?"> 
                <ProductPage />
             </Route>
             <Route path="/cart">

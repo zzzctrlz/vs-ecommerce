@@ -12,7 +12,7 @@ const cors = require("cors");
 
 //initialize
 const app = express();
-app.use(express.json());
+app.use(express.json()); //allows post requests using JSON
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URL)
    .then(()=> {console.log('db connection succesful')})
