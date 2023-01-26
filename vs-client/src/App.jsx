@@ -8,12 +8,13 @@ import SuccessPage from "./Pages/SuccessPage";
 
 import{
    BrowserRouter,
-   Switch,
+   Routes,
    Route,
-   Redirect,
+   Navigate,
 } from "react-router-dom";
 
 import {useSelector} from "react-redux";
+import { NavigateBefore } from '@mui/icons-material';
 
 
 
@@ -23,29 +24,15 @@ const App = () => {
   //const user = null;
   return (
       <BrowserRouter>
-         <Switch>
-            <Route exact path="/" >
-               <HomePage />
-            </Route>
-            <Route path="/register">
-               {user ? <Redirect to="/" /> : <RegisterPage />}   
-            </Route>
-            <Route path="/login">
-               {user ? <Redirect to="/" /> : <LoginPage />}   
-            </Route>
-            <Route path="/products/:category?">
-               <ProductsPage />   
-            </Route>
-            <Route path="/product/:id?"> 
-               <ProductPage />
-            </Route>
-            <Route path="/cart">
-               <CartPage />   
-            </Route>
-            <Route path="/success">
-               <SuccessPage />
-            </Route>
-         </Switch>
+         <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="register" element={user ? <Navigate to="/" replace /> : <RegisterPage />} />
+            <Route path="login" element={user ? <Navigate to="/" replace /> : <LoginPage />} />
+            <Route path="products/:category?" element={<ProductsPage />} />
+            <Route path="product/:id?" element={<ProductPage />} />
+            <Route path="cart" element={<CartPage />} />
+            <Route path="success" element={<SuccessPage />} />
+         </Routes>
       </BrowserRouter> 
   );
 };
