@@ -46,7 +46,7 @@ const FooterLinks = () => {
     <div>
       <Container>
          <LeftCol>
-            <Title>Content</Title>
+            <Title>Content <p>(coming soon!)</p></Title>
             <hr/>
             <br/>
             <ul>
@@ -61,9 +61,9 @@ const FooterLinks = () => {
             <hr/>
             <br/>
             <ul>
-               <Li><A href="#">Clothes</A></Li>
+               <Li><A href="#">Tshirts</A></Li>
+               <Li><A href="#">Hats</A></Li>
                <Li><A href="#">Patches</A></Li>
-               <Li><A href="#">Stickers</A></Li>
                <Li><A href="#">Misc</A></Li>
             </ul>
          </MidCol>

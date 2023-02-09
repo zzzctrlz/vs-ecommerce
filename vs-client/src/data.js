@@ -1,7 +1,3 @@
-/*import slide1Pic from "./Assets/viet-alley.jpg"*/
-import tshirtClipart from "./Assets/tshirtClipart.png"
-//export {tshirtClipart}
-
 export const slides = [
   /*  template
   {
@@ -46,59 +42,3 @@ export const slides = [
    },
 ];
 
-export const products = [
- /* template
-   {
-      id: ,
-      img: "",
-   }, 
-*/
-{
-   id: 0,
-   img: tshirtClipart,
-   alt: "Pho Bowl shirt"
-},  
-
-{
-   id: 1,
-   img: tshirtClipart,
-   alt: "Viet Gorilla shirt" 
-},
-
-{
-   id: 2,
-   img: tshirtClipart,
-   alt: "Keep It Rieu shirt"
-}, 
-
-{
-   id: 3,
-   img: tshirtClipart,
-   alt: "Du Ma shirt" 
-}, 
-
-{
-   id: 4,
-   img: tshirtClipart,
-   alt: "Com Tam shirt"
-}, 
-
-{
-   id: 5,
-   img: tshirtClipart,
-   alt: "blabla shirt",
-},
-
-{
-   id: 6 ,
-   img: tshirtClipart,
-   alt: "bloopity shirt",
-}, 
-
-{
-   id: 7,
-   img: tshirtClipart,
-   alt: "aflkjfelkafj shirt",
-}, 
-
-];

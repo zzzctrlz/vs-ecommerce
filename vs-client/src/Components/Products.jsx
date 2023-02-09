@@ -90,7 +90,7 @@ const Products = ({cat, filters, sort}) => {
  */
    return (
       <Container>
-        {products.map((item)=> <Product item={item} key={item.id} />)}
+        {products.map((item)=> <Product item={item} key={item._id} />)}
       </Container>
    );
    

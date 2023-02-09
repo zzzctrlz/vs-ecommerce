@@ -1,35 +1,56 @@
+//component imports
 import Announcement from "../Components/Announcement"
 import Navbar from "../Components/Navbar"
 import FooterLinks from "../Components/FooterLinks"
 import Copyright from "../Components/Copyright"
+//style imports
 import styled from "styled-components"
-import tshirt from "../Assets/tshirtClipart.png"
 import { Remove, Add } from "@mui/icons-material"
+//react and redux imports
+import { useState, useEffect } from "react"
+import {useLocation} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {publicRequest} from "../requests";
+import {addProduct} from "../Redux/cartSlice";
 
+
+//styled components
 const Wrapper=styled.div`
    display: flex;
    padding: 50px;
+   flex-wrap: wrap;
 `
 const ImgContainer=styled.div`
    flex: 1;
-   border: 1px solid black;
    display: flex;
    align-items: center;
    justify-content: center;
    background-color: black;
+ //  overflow: hidden;
+   box-sizing: border-box;
+   padding: 40px;
+   flex-basis: 50%;
+   min-width: 400px;
 `
 const Img=styled.img`
-   height: 80%;
+   width: clamp(350px, 90%, 1000px);
+   object-fit: contain;
+   
+
 `
 const InfoContainer=styled.div`
    flex: 1;
-   padding: 0px 123px;
+   padding: 20px 123px;
    display: flex; 
    flex-direction: column;
    justify-content: center;
    align-items: flex-start;
    gap: 30px;
    border: 1px solid black;
+   box-sizing: border-box; 
+   //didn't make a difference on padding taking more room???
+   flex-basis: 50%;
+   min-width: 400px;
 `
 const FiltersContainer=styled.div`
    display: flex;
@@ -79,49 +100,81 @@ border: 1px solid black;
 &:hover{
    background-color: lightgray;
 }
-
 `
 
 
-
-
 const ProductPage = () => {
+  const dispatch = useDispatch();
+  const loc = useLocation();
+  const id = loc.pathname.split("/")[2]; 
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
+
+  useEffect(()=>{
+   const getProduct = async()=>{
+      try{
+        // alert('in getProduct');
+         //console.log('fetching product');
+         const res = await publicRequest.get("/products/find/" + id);
+         console.log(res.data.img)
+         setProduct(res.data);
+      }catch(err){console.log(err.response.data)}
+   };
+   getProduct();
+  }, [id]);
+
+  const handleQuantity = (type) => {
+    if(type ==="dec"){
+      quantity > 1 && setQuantity(quantity -1);
+    }else{
+      setQuantity(quantity+1);
+    }
+  };
+
+  const handleAddToCart = ()=>{
+     dispatch(
+      addProduct({...product, quantity, color, size})
+     );
+     console.log({...product, quantity, color, size});
+  };
+
+  
   return (
     <div>
       <Announcement />
       <Navbar />
       <Wrapper>
          <ImgContainer>
-            <Img src={tshirt} />
+            <Img src={product.img} />
          </ImgContainer>
 
          <InfoContainer>
-            <h1>Shirty Shirt</h1>
+            <h1>{product.title}</h1>
             
             
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis saepe tenetur quo ipsa nihil dolor illum. Consectetur maiores dicta magni, perferendis ducimus ipsam molestias, expedita, accusamus quod voluptate quisquam provident!</p>
-            <PriceP>Price: $23</PriceP>
+            <PriceP>Price: ${product.price}</PriceP>
+
             <FiltersContainer>
-               <SizeFilter>
-                  <option>S</option>
-                  <option>M</option>
-                  <option>L</option>
-                  <option>XL</option>
-                  <option>XXL</option>
-                  <option>XXXL</option>
+               <SizeFilter onChange ={(e)=>setSize(e.target.value)}>
+                {product.size?.map((size)=> (<option key={size}>{size}</option>))}
                </SizeFilter>
+               
                <ColorsContainer>
-                  <ColorOption color='black'></ColorOption>
-                  <ColorOption color='white'></ColorOption>
-                  <ColorOption color='red'></ColorOption>
+                  {product.color?.map((c)=>
+                     (<ColorOption color={c} key={c} onClick={()=>setColor(c)} />)
+                  )}   
                </ColorsContainer>
             </FiltersContainer>
+
             <AddContainer>
-               <Remove sx={{cursor: 'pointer'}}/>
-               <AmountBox>1</AmountBox>
-               <Add sx={{cursor: 'pointer'}}/>
+               <Remove onClick={()=>handleQuantity("dec")} sx={{cursor: 'pointer'}}/>
+               <AmountBox>{quantity}</AmountBox>
+               <Add onClick={()=>handleQuantity("inc")} sx={{cursor: 'pointer'}}/>
             </AddContainer>
-            <Button>Add</Button>
+            <Button onClick={handleAddToCart}>ADD TO CART</Button>
          </InfoContainer>
       </Wrapper>
       <FooterLinks />

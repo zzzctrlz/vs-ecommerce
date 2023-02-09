@@ -1,12 +1,17 @@
-import styled from "styled-components"
+//component imports
 import Announcement from "../Components/Announcement"
 import Copyright from "../Components/Copyright"
 import FooterLinks from "../Components/FooterLinks"
 import Navbar from "../Components/Navbar"
-import tshirt from "../Assets/tshirtClipart.png"
+//style imports
+import styled from "styled-components"
 import { Remove, Add } from "@mui/icons-material"
-
-
+//React/Router/Axios/Redux/Stripe imports
+import {useEffect, useState} from "react";
+import {userRequest} from "../requests";
+import {useSelector } from "react-redux";
+import StripeCheckout from "react-stripe-checkout";
+import {useHistory } from "react-router"
 
 
 const Container = styled.div`
