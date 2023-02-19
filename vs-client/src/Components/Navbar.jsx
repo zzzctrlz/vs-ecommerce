@@ -2,6 +2,7 @@ import { Facebook, Instagram, SearchOutlined, ShoppingCartOutlined, Twitter } fr
 import { Badge } from "@mui/material";
 import styled from "styled-components";
 import logo from "../Assets/VietShietLogo500px.png";
+import {useSelector} from "react-redux";
 
 
 const Wrapper = styled.div`
@@ -51,8 +52,16 @@ const RightItem = styled.div`
       color: white;
    }
 `
+const A = styled.a`
+color: #d32f2f;
+
+//&:visited{
+  // color: white;
+//}
+`
+
 const SocialIcons = styled.div`
-   color: #d32f2f;
+   //color: #d32f2f;
    display: flex;
    width: 166px;
    justify-content: space-between;
@@ -98,14 +107,16 @@ const WhiteDiv = styled.div`
 
 
 const Navbar = () => {
+   const cart = useSelector((state)=>state.cart);
+
   return (
       <Wrapper>
          <Left>
             <Title>VIET SHIET.</Title>
             <SocialIcons>
-               <SIcon><Facebook /></SIcon>
-               <SIcon><Instagram /></SIcon>
-               <SIcon><Twitter /></SIcon> 
+               <A href="https://www.facebook.com/VietShiet" target="_blank"><SIcon><Facebook /></SIcon></A>
+               <A href="https://www.instagram.com/viet_shiet/" target="_blank"><SIcon><Instagram /></SIcon></A>
+               <A href="https://twitter.com/VietShiet" target="_blank"><SIcon><Twitter /></SIcon></A>
             </SocialIcons>
          </Left>
          <Center>
@@ -120,7 +131,7 @@ const Navbar = () => {
             </RightItem>
             <RightItem>ABOUT</RightItem>
             <RightItem>REGISTER/LOGIN</RightItem>
-            <RightItem><Badge badgeContent={0} color="error" showZero>
+            <RightItem><Badge badgeContent={cart.typeQuantity} color="error" showZero>
                            <ShoppingCartOutlined />
                        </Badge>
             </RightItem>

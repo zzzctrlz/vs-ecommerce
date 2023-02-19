@@ -11,7 +11,9 @@ import {useEffect, useState} from "react";
 import {userRequest} from "../requests";
 import {useSelector } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
-import {useHistory } from "react-router"
+//import {useHistory } from "react-router"; legacy. change to useNavigate
+
+const KEY = process.env.PUB_STRIPE_KEY;
 
 
 const Container = styled.div`
@@ -97,51 +99,43 @@ const Price=styled.p`
 
 
 const CartPage = () => {
+   const cart = useSelector((state)=>state.cart);
+   const [stripeToken, setStripeToken] = useState(null);
+  // const history = useHistory();
+
+   const onToken = (token)=>{
+      setStripeToken(token);
+   };
+
   return (
     <Container>
       <Announcement />
       <Navbar />
       <Wrapper>
-         <Title>Your Cart(3)</Title>
+         <Title>Your Cart({cart.quantity})</Title>
          <ButtonContainer>
             <button>Keep Shopping</button>
             <button>Checkout Now</button>
          </ButtonContainer>
-         
-         <Product>
-            <ProductDetails>
-               <Img src={tshirt}/>
-               <ProductName>Shirty Shirt</ProductName>
-               <LesserDetails>
-                  <ProductSize>M</ProductSize>
-                  <ProductColor>Black</ProductColor>
-                  <ProductId>3134</ProductId>
-               </LesserDetails>
-            </ProductDetails>
-            <PriceDetails>
-               <Remove />
-               <Quantity>1</Quantity>
-               <Add />
-               <Price>$23.00</Price>
-            </PriceDetails>
-         </Product>
-         <Product>
-         <ProductDetails>
-               <Img src={tshirt}/>
-               <ProductName>Pho Shirt</ProductName>
-               <LesserDetails>
-                  <ProductSize>L</ProductSize>
-                  <ProductColor>White</ProductColor>
-                  <ProductId>3135</ProductId>
-               </LesserDetails>
-            </ProductDetails>
-            <PriceDetails>
-               <Remove />
-               <Quantity>2</Quantity>
-               <Add />
-               <Price>$46.00</Price>
-            </PriceDetails>
-         </Product> 
+         {cart.products.map((product)=> (
+            <Product>
+               <ProductDetails>
+                  <Img src={product.img}/>
+                  <ProductName>{product.title}</ProductName>
+                  <LesserDetails>
+                     <ProductSize>{product.size}</ProductSize>
+                     <ProductColor>{product.color}</ProductColor>
+                     <ProductId>{product._id}</ProductId>
+                  </LesserDetails>
+               </ProductDetails>
+               <PriceDetails>
+                  <Remove />
+                  <Quantity>{product.quantity}</Quantity>
+                  <Add />
+                  <Price>{product.quantity * product.price}</Price>
+               </PriceDetails>
+            </Product>
+         ))}
       </Wrapper>
       <FooterLinks />
       <Copyright />

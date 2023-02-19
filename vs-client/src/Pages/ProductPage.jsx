@@ -115,10 +115,7 @@ const ProductPage = () => {
   useEffect(()=>{
    const getProduct = async()=>{
       try{
-        // alert('in getProduct');
-         //console.log('fetching product');
          const res = await publicRequest.get("/products/find/" + id);
-         console.log(res.data.img)
          setProduct(res.data);
       }catch(err){console.log(err.response.data)}
    };
@@ -133,12 +130,25 @@ const ProductPage = () => {
     }
   };
 
+  const handleSetColor = (e) =>{
+    let colorOptions = document.querySelectorAll(ColorOption);
+    colorOptions.forEach((colorOption)=>{
+      if(colorOption.dataset.color === e.target.dataset.color){colorOption.style.border = "3px solid black"}
+      else{colorOption.style.border = "1px solid black"}
+    })
+    setColor(e.target.dataset.color);
+  }
+
   const handleAddToCart = ()=>{
-     dispatch(
-      addProduct({...product, quantity, color, size})
-     );
-     console.log({...product, quantity, color, size});
-  };
+     if(color&&size)
+      {dispatch(
+         addProduct({...product, quantity, color, size})
+       );
+       console.log({...product, quantity, color, size});
+      } 
+     else{alert("please pick a color AND size!"); 
+          console.log(color + " " + size)}
+   };
 
   
   return (
@@ -159,12 +169,13 @@ const ProductPage = () => {
 
             <FiltersContainer>
                <SizeFilter onChange ={(e)=>setSize(e.target.value)}>
+                <option key="disabled" selected={true} disabled>choose a size!</option>
                 {product.size?.map((size)=> (<option key={size}>{size}</option>))}
                </SizeFilter>
                
                <ColorsContainer>
                   {product.color?.map((c)=>
-                     (<ColorOption color={c} key={c} onClick={()=>setColor(c)} />)
+                     (<ColorOption color={c} data-color={c} key={c} alt={c} onClick={(e)=>handleSetColor(e)} />)
                   )}   
                </ColorsContainer>
             </FiltersContainer>

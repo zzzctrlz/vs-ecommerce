@@ -1,6 +1,7 @@
 import HomePage from './Pages/HomePage';
 import RegisterPage from './Pages/RegisterPage';
 import LoginPage from './Pages/LoginPage';
+import AboutPage from "./Pages/AboutPage";
 import ProductsPage from './Pages/ProductsPage';
 import ProductPage from './Pages/ProductPage';
 import CartPage from './Pages/CartPage';
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="register" element={user ? <Navigate to="/" replace /> : <RegisterPage />} />
             <Route path="login" element={user ? <Navigate to="/" replace /> : <LoginPage />} />
+            <Route path="about" element={<AboutPage />} />
             <Route path="products/:category?" element={<ProductsPage />} />
             <Route path="product/:id?" element={<ProductPage />} />
             <Route path="cart" element={<CartPage />} />
