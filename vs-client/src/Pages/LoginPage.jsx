@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import {Link} from "react-router-dom"
 
 const Container = styled.div`
    height: 100vh;
@@ -57,6 +58,7 @@ const LoginPage = () => {
                <Input placeholder='Email' />
                <Input placeholder='Password' />   
                <Button>LOG IN</Button>
+               <p>Don't have an account? <Link to={'/register'}>Register here!</Link></p>
             </Form>
          </Wrapper>
       </Container>

@@ -144,7 +144,7 @@ const ProductPage = () => {
       {dispatch(
          addProduct({...product, quantity, color, size})
        );
-       console.log({...product, quantity, color, size});
+       //console.log({...product, quantity, color, size});
       } 
      else{alert("please pick a color AND size!"); 
           console.log(color + " " + size)}

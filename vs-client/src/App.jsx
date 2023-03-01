@@ -15,7 +15,7 @@ import{
 } from "react-router-dom";
 
 import {useSelector} from "react-redux";
-import { NavigateBefore } from '@mui/icons-material';
+//import { NavigateBefore } from '@mui/icons-material';
 
 
 
@@ -31,7 +31,7 @@ const App = () => {
             <Route path="login" element={user ? <Navigate to="/" replace /> : <LoginPage />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="products/:category?" element={<ProductsPage />} />
-            <Route path="product/:id?" element={<ProductPage />} />
+            <Route path="product/:id" element={<ProductPage />} />
             <Route path="cart" element={<CartPage />} />
             <Route path="success" element={<SuccessPage />} />
          </Routes>

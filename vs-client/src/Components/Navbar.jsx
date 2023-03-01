@@ -3,6 +3,11 @@ import { Badge } from "@mui/material";
 import styled from "styled-components";
 import logo from "../Assets/VietShietLogo500px.png";
 import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+
+//import {clearCart} from "../Redux/cartSlice"; remember to add useDispatch ^^
+
+
 
 
 const Wrapper = styled.div`
@@ -59,7 +64,6 @@ color: #d32f2f;
   // color: white;
 //}
 `
-
 const SocialIcons = styled.div`
    //color: #d32f2f;
    display: flex;
@@ -97,19 +101,24 @@ const Search = styled.input`
       color: transparent;
    }
 `
-const WhiteDiv = styled.div`
-   width: 100%;
-   height: 5px;
-   background-color: white;
+
+const SLink = styled(Link)`
+text-decoration: none;
 `
-
-
 
 
 const Navbar = () => {
    const cart = useSelector((state)=>state.cart);
+   //const dispatch = useDispatch(); remember to import useDispatch with useSelector in react-redux; 
 
-  return (
+   /*
+    onClick ={()=> {
+      dispatch(clearCart());
+      console.log(cart.products, cart.typeQuantity, cart.total)} 
+    }}
+    add to any component to make clearCart test
+   */
+    return (
       <Wrapper>
          <Left>
             <Title>VIET SHIET.</Title>
@@ -129,12 +138,15 @@ const Navbar = () => {
                   <SearchOutlined />
                </SearchWrapper>
             </RightItem>
-            <RightItem>ABOUT</RightItem>
-            <RightItem>REGISTER/LOGIN</RightItem>
-            <RightItem><Badge badgeContent={cart.typeQuantity} color="error" showZero>
-                           <ShoppingCartOutlined />
-                       </Badge>
-            </RightItem>
+            <SLink to={`/about`}><RightItem>ABOUT</RightItem></SLink>
+            <SLink to={`/login`}><RightItem>SIGN IN</RightItem></SLink>
+            <SLink to={`/cart`}>
+               <RightItem>
+                  <Badge badgeContent={cart.typeQuantity} color="error" showZero>
+                     <ShoppingCartOutlined />
+                  </Badge>
+               </RightItem>
+            </SLink>
          </Right>
       </Wrapper>  
 
