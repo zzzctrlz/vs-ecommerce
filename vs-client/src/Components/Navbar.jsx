@@ -133,10 +133,12 @@ const Navbar = () => {
          </Center>
          <Right>
             <RightItem>
+               {/*
                <SearchWrapper>
                   <Search placeholder="Search"/>
                   <SearchOutlined />
                </SearchWrapper>
+               */}
             </RightItem>
             <SLink to={`/about`}><RightItem>ABOUT</RightItem></SLink>
             <SLink to={`/login`}><RightItem>SIGN IN</RightItem></SLink>

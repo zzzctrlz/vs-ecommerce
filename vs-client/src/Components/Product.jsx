@@ -11,7 +11,7 @@ const Container = styled.div`
    align-items: center;
    justify-content: center;
    background-color: black;
-   border: 2px solid red;
+   //border: 2px solid red;
    overflow: hidden;
    //margin: 10 px;
    //flex: 0 1 25%;

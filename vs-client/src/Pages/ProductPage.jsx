@@ -168,8 +168,8 @@ const ProductPage = () => {
             <PriceP>Price: ${product.price}</PriceP>
 
             <FiltersContainer>
-               <SizeFilter onChange ={(e)=>setSize(e.target.value)}>
-                <option key="disabled" selected={true} disabled>choose a size!</option>
+               <SizeFilter defaultValue="disabledOption" onChange ={(e)=>setSize(e.target.value)}>
+                <option key="disabled" value="disabledOption" disabled>choose a size!</option>
                 {product.size?.map((size)=> (<option key={size}>{size}</option>))}
                </SizeFilter>
                
