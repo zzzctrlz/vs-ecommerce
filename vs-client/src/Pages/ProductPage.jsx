@@ -64,6 +64,7 @@ const SizeFilter=styled.select`
 `
 const ColorsContainer=styled.div`
    display:flex;
+   align-items: center;
 `
 const ColorOption=styled.div`
    border-radius: 50%;
@@ -72,6 +73,7 @@ const ColorOption=styled.div`
    width: 33px;
    background-color: ${props => props.color};
    border: 1px solid black;
+   margin-left: 3px;
 `
 const PriceP=styled.p`
 `
@@ -90,15 +92,30 @@ const AmountBox=styled.span`
    margin: 0px 15px;
 `
 const Button=styled.button`
+// .attrs(props=>({className: props.className,}))
 padding: 15px;
-background-color: white;
+width: 150px;
+height 60px;
 cursor: pointer;
 font-weight: 500;
 font-size: 25;
-border: 1px solid black;
+// border: 3px solid red;
+color: white;
+border: none;
+border-radius: 3px;
+background-color: #d32f2f;
+// transition: all 1s ease-in;
 
 &:hover{
-   background-color: lightgray;
+   background-color: red;
+
+// & .activeButton{
+//    disabled = true; 
+//    backgroundColor = "blue";
+//    color = "white";
+//    // addButton.innerHTML = "ADDED!"
+//    cursor = "not-allowed";
+// }
 }
 `
 
@@ -140,10 +157,26 @@ const ProductPage = () => {
   }
 
   const handleAddToCart = ()=>{
+   let addButton = document.getElementById("addButton");
      if(color&&size)
       {dispatch(
          addProduct({...product, quantity, color, size})
        );
+      addButton.disabled = true; 
+      addButton.style.backgroundColor = "#d32f2f";
+      addButton.style.color = "white";
+      addButton.innerHTML = "ADDED!"
+      addButton.style.cursor = "not-allowed";
+         // addButton.className = "activeButton";
+         // console.log(addButton.className);
+      setTimeout(()=>{
+         addButton.disabled = false;
+         addButton.style.color = "white";
+         addButton.innerHTML = "ADD TO CART";
+         addButton.style.cursor = "pointer";
+         // addButton.className = "";
+         // console.log(addButton.className);
+      }, 4000);
        //console.log({...product, quantity, color, size});
       } 
      else{alert("please pick a color AND size!"); 
@@ -174,6 +207,7 @@ const ProductPage = () => {
                </SizeFilter>
                
                <ColorsContainer>
+                  <p>Select Color:</p>
                   {product.color?.map((c)=>
                      (<ColorOption color={c} data-color={c} key={c} alt={c} onClick={(e)=>handleSetColor(e)} />)
                   )}   
@@ -185,7 +219,7 @@ const ProductPage = () => {
                <AmountBox>{quantity}</AmountBox>
                <Add onClick={()=>handleQuantity("inc")} sx={{cursor: 'pointer'}}/>
             </AddContainer>
-            <Button onClick={handleAddToCart}>ADD TO CART</Button>
+            <Button id="addButton" onClick={handleAddToCart}>ADD TO CART</Button>   
          </InfoContainer>
       </Wrapper>
       <FooterLinks />

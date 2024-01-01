@@ -95,9 +95,11 @@ const P = styled.p`
 
 const Slider = () => {
    const [slideIndex, setSlideIndex] = useState(0);
-   let autoSlideChange;
-
+   //let autoSlideChange;
+   //commenting out the above line (initializing autoSlideChange) and setting a name for the below setTimeOut didn't work to resovle
+   //the issue. still going slideIndex 0, 0, 2, 0, 1, 2, 0, 1, 2, etc.  why the first two 0s???!?
    //useEffect to change circle color when slideIndex changes
+
    useEffect(()=>{
       let circles = document.querySelectorAll(Circle);
       circles.forEach((value,index)=>{   
@@ -106,21 +108,58 @@ const Slider = () => {
       })
    }, [slideIndex]);
 
-   //change slide every 8 seconds by updating slideIndex which will trigger useEffect with slideIndex dependency
+   
    useEffect(()=>{
-      autoSlideChange = setInterval(()=> {setSlideIndex(slideIndex=>slideIndex < 2 ? slideIndex + 1 : 0)}, 8000)
-   }, []);
-  
+      const timeout = setTimeout(()=>{
+         let cur;
+         if (slideIndex < 2) {
+            cur = slideIndex + 1;
+         } else {
+            cur = 0;
+         }
+         setSlideIndex(cur);
+      }, 4000);
+      //cleanup function (triggered by/runs before next useEffect instance)
+      return () => {
+         clearTimeout(timeout);
+       };
+   },[slideIndex])
+
+   //change slide every 8 seconds by updating slideIndex which will trigger useEffect with slideIndex dependency
+   /*const timerId = setTimeout(() => {
+      console.log(`begin setTimeout ${slideIndex}`);
+      let cur;
+      if (slideIndex < 2) {
+         cur = slideIndex + 1;
+      } else {
+         cur = 0;
+      }
+      setSlideIndex(cur);
+      //setSlideIndex(slideIndex=>slideIndex < 2 ? slideIndex + 1 : 0);
+      console.log(`end setTimeout ${slideIndex}, ${cur}`);
+   }, 4000);
+
+   
+   
+  const clearTimeouts = () => {
+   while(timerId--){clearTimeout(timerId)};
+  };*/
  
    const handleCircleClick = (circleNum) => {
+      //clearInterval(interval);
+      console.log(`begin handleCircleClick ${slideIndex}`);
       setSlideIndex(circleNum);
-      clearInterval(autoSlideChange);
+      console.log(`end handleCircleClick ${slideIndex}`);
+     // clearInterval(autoSlideChange);
    }
 
    const handleArrowClick = (direction) => {
+      //clearInterval(interval);
+      console.log(`begin handleArrowClick ${slideIndex}`);
       if(direction ==="left"){setSlideIndex(slideIndex=>slideIndex > 0 ? slideIndex - 1 : 2)}
       else{setSlideIndex(slideIndex=>slideIndex < 2 ? slideIndex + 1 : 0)}
-      clearInterval(autoSlideChange);
+      // clearInterval(autoSlideChange);
+      console.log(`end handleArrowClick ${slideIndex}`);
    }
 /* //moved code to anonymous function body of useEffect because setState within a 
    //closure (function inside function) only has access to old state value kind of

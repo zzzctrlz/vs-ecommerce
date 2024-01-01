@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 
 const Copyright = () => {
   return (
-    <Wrapper>© 2022 Viet Shiet</Wrapper>
+    <Wrapper>© 2023 Viet Shiet</Wrapper>
   )
 }
 

@@ -1,9 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom'; //changed from 'from 'react-dom/client' to just react-dom
+import ReactDOM from 'react-dom/client'; //changed to 'react-dom/client' from react-dom
 import App from './App';
 import {Provider} from "react-redux";
 import {store,persistor} from "./Redux/store";
 import {PersistGate} from "redux-persist/integration/react";
+
 
 // NEWER SYNTAX (ReactDOM.render now legacy)
 //not sure if need to include <React.StrictMode>

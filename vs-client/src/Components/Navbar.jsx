@@ -2,8 +2,9 @@ import { Facebook, Instagram, SearchOutlined, ShoppingCartOutlined, Twitter } fr
 import { Badge } from "@mui/material";
 import styled from "styled-components";
 import logo from "../Assets/VietShietLogo500px.png";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
+import {signOut} from "../Redux/userSlice";
 
 //import {clearCart} from "../Redux/cartSlice"; remember to add useDispatch ^^
 
@@ -43,7 +44,7 @@ const Right = styled.div`
 `
 const Title = styled.h1`
   // color: #d32f2f;
-   color: white;
+  // color: white;
    font-weight: 700;
 `
 const RightItem = styled.div`
@@ -104,11 +105,20 @@ const Search = styled.input`
 
 const SLink = styled(Link)`
 text-decoration: none;
+color: white;
+
+&:hover{
+   //color: #d32f2f;
+   cursor: pointer;
+   //text-decoration: underline;
+}
 `
 
 
 const Navbar = () => {
    const cart = useSelector((state)=>state.cart);
+   const user = useSelector((state)=>state.user.currentUser);
+   const dispatch = useDispatch();
    //const dispatch = useDispatch(); remember to import useDispatch with useSelector in react-redux; 
 
    /*
@@ -118,10 +128,15 @@ const Navbar = () => {
     }}
     add to any component to make clearCart test
    */
+
+    const handleSignout = ()=>{
+      dispatch(signOut())
+    };
+
     return (
       <Wrapper>
          <Left>
-            <Title>VIET SHIET.</Title>
+            <SLink to={`/`}><Title>VIET SHIET.</Title></SLink>
             <SocialIcons>
                <A href="https://www.facebook.com/VietShiet" target="_blank"><SIcon><Facebook /></SIcon></A>
                <A href="https://www.instagram.com/viet_shiet/" target="_blank"><SIcon><Instagram /></SIcon></A>
@@ -141,7 +156,8 @@ const Navbar = () => {
                */}
             </RightItem>
             <SLink to={`/about`}><RightItem>ABOUT</RightItem></SLink>
-            <SLink to={`/login`}><RightItem>SIGN IN</RightItem></SLink>
+            <SLink to={`/products`}><RightItem>SHOP</RightItem></SLink>
+            {user ? <RightItem onClick={handleSignout}>SIGN OUT</RightItem> : <SLink to={`/login`}><RightItem>SIGN IN</RightItem></SLink>}
             <SLink to={`/cart`}>
                <RightItem>
                   <Badge badgeContent={cart.typeQuantity} color="error" showZero>

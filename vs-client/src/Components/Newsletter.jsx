@@ -1,5 +1,8 @@
 import { Send } from "@mui/icons-material"
 import styled from "styled-components"
+import {useState} from "react"
+import {addEmail} from "../Redux/userSlice";
+import {useSelector, useDispatch} from "react-redux";
 
 const Wrapper = styled.div`
    display: flex;
@@ -7,7 +10,7 @@ const Wrapper = styled.div`
    gap: 20px;
    justify-content: center;
    align-items: center;
-   padding: 100px 50px;
+   padding: 75px 50px;
    //background-color: #3e3e3e;
    background-color: black;
    color: white;
@@ -47,13 +50,16 @@ cursor: pointer;
 `
 
 const Newsletter = () => {
+   const user = useSelector((state)=>state.user);
+   const dispatch = useDispatch();
+   const [email, setEmail] = useState(null);
   return (
     <Wrapper>
       <H1>Newsletter!</H1>
       <P>Sign up for updates on content and products!</P>
       <InputContainer>
-         <Input type="text" />
-         <Button><Send /></Button>
+         <Input type="text" onChange={(e)=>setEmail(e.target.value)} />
+         <Button onClick = {()=> dispatch(addEmail(email)) && alert(user.emailArray)} ><Send /></Button>
       </InputContainer>
       
     </Wrapper>

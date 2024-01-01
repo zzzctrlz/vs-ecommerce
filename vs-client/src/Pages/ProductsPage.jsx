@@ -1,4 +1,3 @@
-import styled from "styled-components"
 import Products from "../Components/Products"
 import Announcement from "../Components/Announcement"
 import Navbar from "../Components/Navbar"
@@ -6,7 +5,9 @@ import Newsletter from "../Components/Newsletter"
 import FooterLinks from "../Components/FooterLinks"
 import Copyright from "../Components/Copyright"
 
-import {useState} from "react"
+import styled from "styled-components"
+import {useState, useEffect} from "react"
+import {useLocation} from "react-router"
 
 /*const Container = styled.div`
     display: flex;
@@ -27,7 +28,7 @@ const FiltersContainer = styled.div`
    display: flex;
    justify-content: space-around;
    align-items: center;
-   padding: 20px 10px;
+   padding: 15px 10px 40px 10px;
 `
 const CatFilter = styled.select`
    
@@ -44,33 +45,82 @@ const Sort = styled.select`
 `
 
 const ProductsPage = () => {
-
-   const [filters, setFilters] = useState({});
+   
    const [sort, setSort] = useState("newest");
+   const [filters, setFilters] = useState({});
+   
+   const location =useLocation();
+   //console.log(location);
+   const qCat = location.pathname.split("/")[2];
+  // console.log(qCat);
 
+  useEffect(()=>{
+   if(qCat !== undefined) {setFilters({cat:qCat})};
+   if(qCat === undefined) {setFilters({})};
+  },[qCat]);
+
+  //useEffect to reset filters anytime hat or patch is selected since only one color/size available and otherwise no products would show
+//   useEffect(()=>{
+//    if(filters.cat === "hat"){
+//       setFilters({cat:"hat"})
+//    }
+//    if(filters.cat === "patch"){
+//       setFilters({cat:"patch"})
+//    }
+// }, [filters.cat]);
+
+//console.log(filters);
+   
   return (
     <div>
       <Announcement />
       <Navbar />
       <Title>Products</Title> 
       <FiltersContainer>
-         <CatFilter defaultValue="disabledOption" onChange={(e)=>setFilters({...filters, cat: e.target.value})}>
+         <CatFilter defaultValue="disabledOption" onChange={(e)=>{
+            if(e.target.value === "hat" || e.target.value === "patch"){
+               setFilters({cat: e.target.value})
+            }
+            else{
+               setFilters({...filters, cat: e.target.value});
+            }
+         }}>
             <option value="disabledOption" disabled>Category</option>
             <option value="men">men</option>
             <option value="women">women</option>
             <option value="children">children</option>
-            <option value="shirts">shirts</option>
-            <option value="hats">hats</option>
-            <option value="patches">patches</option>
+            <option value="shirt">shirts</option>
+            <option value="hat">hats</option>
+            <option value="patch">patches</option>
          </CatFilter>
-         <SizeFilter defaultValue="disabledOption" onChange={(e)=>setFilters({...filters, size: e.target.value})}>
+         <SizeFilter defaultValue="disabledOption" onChange={(e)=>{
+            if(filters.cat === "hat"){
+               setFilters({cat: "hat"});
+            }
+            else if(filters.cat === "patch"){
+               setFilters({cat: "patch"});
+            }
+            else{
+               setFilters({...filters, size: e.target.value});
+            }
+         }}>
             <option value="disabledOption" disabled>Size</option>
             <option value="s">s</option>
             <option value="m">m</option>
             <option value="l">l</option>
             <option value="xl">xl</option>
          </SizeFilter>
-         <ColorFilter defaultValue="disabledOption" onChange={(e)=>setFilters({...filters, color: e.target.value})}>
+         <ColorFilter defaultValue="disabledOption" onChange={(e)=>{
+            if(filters.cat === "hat"){
+               setFilters({cat: "hat"});
+            }
+            else if(filters.cat === "patch"){
+               setFilters({cat: "patch"});
+            }
+            else{
+               setFilters({...filters, color: e.target.value});
+            }
+         }}>
             <option value="disabledOption" disabled>Color</option>
             <option value="red">red</option>
             <option value="black">black</option>

@@ -1,5 +1,8 @@
 import styled from "styled-components"
 import {Link} from "react-router-dom"
+import { useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {login} from "../Redux/apiCalls";
 
 const Container = styled.div`
    height: 100vh;
@@ -49,21 +52,39 @@ const Button = styled.button`
 
 
 const LoginPage = () => {
+   const [username, setUsername] = useState("");
+   const [password, setPassword] = useState("");
+   const dispatch = useDispatch();
+   const {isFetching, error} = useSelector(state => state.user); //user is from store.js
+
+   const handleClick = (e) => {
+      e.preventDefault();
+      login(dispatch, {username, password});
+   };
+
   return (
     <div>
       <Container>
          <Wrapper>
             <Title>WELCOME BACK!</Title>
             <Form>
-               <Input placeholder='Email' />
-               <Input placeholder='Password' />   
-               <Button>LOG IN</Button>
+               <Input placeholder='Email' 
+                      onChange={(e)=> setUsername(e.target.value)}
+               />
+               <Input placeholder='Password' 
+                      type='password'
+                      onChange={(e)=> setPassword(e.target.value)}
+               />   
+               <Button onClick={handleClick} disabled={isFetching}>
+                  LOG IN
+               </Button>
+               {error && <span style={{color: "red", marginTop: "10px"}}>{error}</span>}
                <p>Don't have an account? <Link to={'/register'}>Register here!</Link></p>
             </Form>
          </Wrapper>
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

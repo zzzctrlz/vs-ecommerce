@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 
 const Announcement = () => {
   return (
-    <Wrapper>Grand Opening Sale! Everything 6.9% Off!</Wrapper>
+    <Wrapper>Grand Opening Sale! Everything 10% Off! Free Shipping on Orders Over $50!</Wrapper>
   )
 };
 

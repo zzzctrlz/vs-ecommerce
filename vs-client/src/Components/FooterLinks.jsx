@@ -1,5 +1,6 @@
-import React from 'react'
+//import React from 'react'
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 
 const Container = styled.div`
    display: flex;
@@ -7,8 +8,8 @@ const Container = styled.div`
    color: black;
    justify-content: space-around;
    align-items: center;
-   height: 25vh;
-   //padding: 0 20px;
+   height: auto;
+   padding: 15px 0;
 `
 const LeftCol = styled.div`
    display: flex;   
@@ -39,6 +40,14 @@ const A = styled.a`
    &:hover{
       color: #d32f2f;
    }
+` 
+const SLink = styled(Link)`
+   text-decoration: none;
+   color: #424242;
+
+   &:hover{
+      color: #d32f2f;
+   }
 `
 
 const FooterLinks = () => {
@@ -61,10 +70,10 @@ const FooterLinks = () => {
             <hr/>
             <br/>
             <ul>
-               <Li><A href="#">Tshirts</A></Li>
-               <Li><A href="#">Hats</A></Li>
-               <Li><A href="#">Patches</A></Li>
-               <Li><A href="#">Misc</A></Li>
+               <Li><SLink to={`/products/shirt`}>Tshirts</SLink></Li>
+               <Li><SLink to={`/products/hat`}>Hats</SLink></Li>
+               <Li><SLink to={`/products/patch`}>Patches</SLink></Li>
+               <Li><SLink to={`/products`}>All</SLink></Li>
             </ul>
          </MidCol>
          <RightCol>
@@ -75,7 +84,7 @@ const FooterLinks = () => {
                <Li><A href="#">Email</A></Li>
                <Li><A href="#">Phone</A></Li>
                <Li><A href="#">Social</A></Li>
-               <Li><A href="#">Payment Icons</A></Li>
+               {/* <Li><A href="#">Payment Icons</A></Li> */}
             </ul>
          </RightCol>
       </Container>

@@ -4,7 +4,8 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 
 const Container = styled.div`
-  // padding: 22px 20px 30px 20px;
+   //padding: 22px 20px 30px 20px;
+   padding-bottom: 20px;
    display: flex;
    gap: 10px;
    flex-wrap: wrap;
@@ -15,6 +16,8 @@ const Container = styled.div`
 const Products = ({filters, sort}) => {
    const [products, setProducts] = useState([]);
    const [filteredProducts, setFilteredProducts] = useState([]);
+   console.log(filters);
+   console.log(Object.keys(filters).length);
 
    
    useEffect(()=>{
@@ -24,7 +27,7 @@ const Products = ({filters, sort}) => {
                `http://localhost:5000/api/products`
             );
             setProducts(res.data);
-            setFilteredProducts(res.data); //populate filteredProducts w/ all products in case no filters but yes sort so sort doesn't have to modify all products
+            setFilteredProducts(res.data); //populate filteredProducts w/ all products in case no filters but yes sort so sort doesn't have to modify setProducts directly
          }catch(err){console.log(err)}
       };
       getAndSetProducts();
@@ -59,12 +62,14 @@ const Products = ({filters, sort}) => {
                (prev)=>[...prev].sort((a,b)=>b.price - a.price)
             );
          }
-   },[sort]);
+   },[sort, filters]);
+
  
    return (
       <Container>
          {
-            filters.length === 0 ?
+            
+            Object.keys(filters).length === 0 ?
                products.map((item)=> <Product item={item} key={item._id} />)
                :
                filteredProducts.map((item)=><Product item={item} key={item._id} />)
