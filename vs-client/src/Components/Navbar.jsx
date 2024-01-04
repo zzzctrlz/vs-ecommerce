@@ -2,9 +2,9 @@ import { Facebook, Instagram, SearchOutlined, ShoppingCartOutlined, Twitter } fr
 import { Badge } from "@mui/material";
 import styled from "styled-components";
 import logo from "../Assets/VietShietLogo500px.png";
-import {useSelector, useDispatch} from "react-redux";
-import {Link} from "react-router-dom";
-import {signOut} from "../Redux/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { signOut } from "../Redux/userSlice";
 
 //import {clearCart} from "../Redux/cartSlice"; remember to add useDispatch ^^
 
@@ -29,11 +29,21 @@ const Left = styled.div`
    align-items: flex-start;
    justify-content: center;
    gap: 6px;
+   border: 1px solid green;
+
+   @media (max-width: 830px){
+      display: none;
+   }
 `
 const Center = styled.div`
    flex: 1;
    display: flex;
    justify-content: center;
+   border: 1px solid white;
+
+   @media (max-width: 830px){
+      justify-content: flex-start;
+   }
 
 `
 const Right = styled.div`
@@ -41,7 +51,52 @@ const Right = styled.div`
    display: flex;
    align-items: center;
    justify-content: flex-end;
+   border: 1px solid orange;
 `
+
+const RightExceptCart = styled.div`
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+@media (max-width: 444px){
+   display: none;
+}
+`
+const BurgerMenu = styled.div`
+//display: flex;
+flex-direction: column;
+//justify-content: space-around:       ALSO FIXED BY SETTING CHILD DIVS TO MARGIN AUTO?? thought was just horizontal centering???
+//align-items: center;        FIXED BY SETTING CHILD DIVS TO MARGIN:AUTO
+height: 35px; 
+width: 35px;
+border: 2px solid #d32f2f;
+cursor: pointer;
+display: none;
+margin-left: 20px;
+
+
+&:hover{
+   border: 2px solid white;
+}
+
+&:hover div{
+   background-color: white;
+}
+
+@media (max-width: 444px){
+   display: flex;
+}
+`
+
+const BurgerLine = styled.div`
+   width: 25px;
+   height: 4px;
+   background-color: #d32f2f;
+   //border: 1px solid black;
+   margin: auto;
+`
+
 const Title = styled.h1`
   // color: #d32f2f;
   // color: white;
@@ -70,8 +125,9 @@ const SocialIcons = styled.div`
    display: flex;
    width: 166px;
    justify-content: space-between;
+   border: 1px solid white;
 `
-const SIcon = styled.div `
+const SIcon = styled.div`
    &:hover{
       color: white;
       cursor: pointer;
@@ -116,8 +172,8 @@ color: white;
 
 
 const Navbar = () => {
-   const cart = useSelector((state)=>state.cart);
-   const user = useSelector((state)=>state.user.currentUser);
+   const cart = useSelector((state) => state.cart);
+   const user = useSelector((state) => state.user.currentUser);
    const dispatch = useDispatch();
    //const dispatch = useDispatch(); remember to import useDispatch with useSelector in react-redux; 
 
@@ -129,11 +185,11 @@ const Navbar = () => {
     add to any component to make clearCart test
    */
 
-    const handleSignout = ()=>{
+   const handleSignout = () => {
       dispatch(signOut())
-    };
+   };
 
-    return (
+   return (
       <Wrapper>
          <Left>
             <SLink to={`/`}><Title>VIET SHIET.</Title></SLink>
@@ -144,20 +200,23 @@ const Navbar = () => {
             </SocialIcons>
          </Left>
          <Center>
-            <img src={logo} alt="viet shiet logo" width="77px" height="77px"/>  
+            <img src={logo} alt="viet shiet logo" width="77px" height="77px" />
          </Center>
          <Right>
-            <RightItem>
-               {/*
+            {/*<RightItem>
+               
                <SearchWrapper>
                   <Search placeholder="Search"/>
                   <SearchOutlined />
                </SearchWrapper>
-               */}
-            </RightItem>
-            <SLink to={`/about`}><RightItem>ABOUT</RightItem></SLink>
-            <SLink to={`/products`}><RightItem>SHOP</RightItem></SLink>
-            {user ? <RightItem onClick={handleSignout}>SIGN OUT</RightItem> : <SLink to={`/login`}><RightItem>SIGN IN</RightItem></SLink>}
+               
+            </RightItem>*/}
+            <RightExceptCart>
+               <SLink to={`/about`}><RightItem>ABOUT</RightItem></SLink>
+               <SLink to={`/products`}><RightItem>SHOP</RightItem></SLink>
+               {user ? <RightItem onClick={handleSignout}>SIGN OUT</RightItem> : <SLink to={`/login`}><RightItem>SIGN IN</RightItem></SLink>}
+            </RightExceptCart>
+
             <SLink to={`/cart`}>
                <RightItem>
                   <Badge badgeContent={cart.typeQuantity} color="error" showZero>
@@ -165,11 +224,17 @@ const Navbar = () => {
                   </Badge>
                </RightItem>
             </SLink>
-         </Right>
-      </Wrapper>  
 
-    
-  )
+            <BurgerMenu>
+                  <BurgerLine></BurgerLine>
+                  <BurgerLine></BurgerLine>
+                  <BurgerLine></BurgerLine>
+            </BurgerMenu>
+         </Right>
+      </Wrapper>
+
+
+   )
 }
 
 export default Navbar
