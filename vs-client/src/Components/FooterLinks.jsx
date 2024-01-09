@@ -7,7 +7,7 @@ const Container = styled.div`
    background-color: white;
    color: black;
    justify-content: space-around;
-   align-items: center;
+   align-items: flex-start;
    height: auto;
    padding: 15px 0;
 `
@@ -50,12 +50,17 @@ const SLink = styled(Link)`
    }
 `
 
+const P = styled.p`
+   font-size: 14px;
+   margin-top: -5px;
+`
+
 const FooterLinks = () => {
   return (
     <div>
       <Container>
          <LeftCol>
-            <Title>Content <p>(coming soon!)</p></Title>
+            <Title>Content <P>(coming soon!)</P></Title>
             <hr/>
             <br/>
             <ul>

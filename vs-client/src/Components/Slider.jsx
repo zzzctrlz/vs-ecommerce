@@ -21,39 +21,46 @@ const Wrapper = styled.div`
    justify-content: flex-start;
    overflow:hidden;
    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+   border: 5px solid green;
    ` 
   const Slide = styled.div`
-     width: 100%;
+     min-width: 100%;
      height: 100%;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     transform: translateX(${(props) => props.slideIndex * -100}%);
+     //display: flex;
+     //align-items: center;
+     //justify-content: center;
+     transform: translateX(${(props) => props.slideIndex * -100}%); 
      transition: all 1s ease;
+     border: 3px solid yellow;
+     position: relative;
   `
 
-  const ImgWrapper = styled.div`
-   flex: 1 1 auto;
-   height: 100%;
-   overflow: hidden;
-   //padding: 20px 20px;
-   background-color: orange;
-  `
+//   const ImgWrapper = styled.div`
+//    flex: 1 1 content;
+//    height: 100%;
+//    overflow: hidden;
+//    //min-width: 700px;
+//    border: 1px solid blue;
+//    // //flex-basis: 50%;
+//    // //padding: 20px 20px;
+//    // background-color: orange;
+//    // //width: 100%;
+//   `
 
 const TextWrapper = styled.div`
-   flex: 1 1 0; //setting flex basis to a larger size doesn't fix slide not filling wrapper problem. it just expands into the imagewrapper area. setting fb to 0 also doesn't fix. 
-   color: white;
-   background-color: black;
-   height: 100%;
-  // padding: 185px 185px; //"fixed" slide not filling wrapper width by making text padding match/exceed wrapper width (right around 180px with image being auto sized flex basis). hacky solution. not sure why 100% slide width doesn't just fill it. now going to have to do multiple paddings for various breakpoints bc right now padding prevents shrinking
    display: flex;
    flex-direction: column;
-   align-items: center;
    justify-content: center;
-   //width: 100%; doesn't work for slide not filling wrapper
-   //max-width: 550px; doesn't work for slide not filling wrapper
-   min-width: 600px; // also "fixes" slide not filling wrapper width but now it won't dynamically shrink so would also need multiple breakpoints/media queries just like the padding solution...
-   padding: 0 50px;
+   align-items: center;
+   position: absolute;
+   top: 30%;
+   right: 10%;
+   color: white;
+   padding-left: 20px;
+
+   @media(max-width: 400px){
+      right: 2%;
+   }
 `
 const CircleContainer = styled.div`
    display: flex;
@@ -91,6 +98,11 @@ const P = styled.p`
    font-size: 30px;
    font-weight: 500;
 `
+
+// const Img = styled.img.attrs(props=>({src: props.src, alt: props.alt,}))`
+// width:100%;
+// height: auto;
+// `
 
 
 const Slider = () => {
@@ -171,8 +183,17 @@ const Slider = () => {
          else{value.style.backgroundColor = "black"}
       }) 
    }*/
+ //style={{width: "100%", height: "auto"}}
 
+//  <ImgWrapper>
+//  {/* <Img src={item.img} alt={item.alt} /> // does not work as a styled component with props passed using .attrs for some reason*/}
+//  <img src={item.img} alt={item.alt} style={{objectFit: "cover",}}/>
+// </ImgWrapper>
 
+// <TextWrapper>
+//   <H1>{item.engTitle}</H1>
+//   <P>{item.engText}</P>
+// </TextWrapper>
   return (
    <Container>
 
@@ -181,10 +202,7 @@ const Slider = () => {
       <Wrapper>
          {slides.map((item)=> (
          <Slide slideIndex ={slideIndex}>
-            <ImgWrapper>
-               <img src= {item.img} alt={item.alt} />
-            </ImgWrapper>
-
+            <img src={item.img} style={{objectFit: "cover",}} />
             <TextWrapper>
                <H1>{item.engTitle}</H1>
                <P>{item.engText}</P>

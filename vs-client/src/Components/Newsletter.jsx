@@ -10,8 +10,7 @@ const Wrapper = styled.div`
    gap: 20px;
    justify-content: center;
    align-items: center;
-   padding: 75px 50px;
-   //background-color: #3e3e3e;
+   padding: 50px 50px;
    background-color: black;
    color: white;
 `
@@ -26,16 +25,17 @@ const P = styled.p`
 const InputContainer = styled.div`
    display: flex;
    width: 40%;
+   min-width: 300px;
    height: 40px;
    background-color: white;
    justify-content: space-between;
-   //border: 2px solid #d32f2f;
+
 `
 const Input = styled.input`
 flex: 9;
 border: none;
 padding-left: 20px;
-height: 35px;
+height: 40px;
 font-size: 20px;
 &:focus{
    outline: none;

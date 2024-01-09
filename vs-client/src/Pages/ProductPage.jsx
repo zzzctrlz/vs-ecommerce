@@ -92,7 +92,7 @@ const AmountBox=styled.span`
    margin: 0px 15px;
 `
 const Button=styled.button`
-// .attrs(props=>({className: props.className,}))
+//.attrs(props=>({className: props.className,}))   .attrs worked once when trying but failed upon attempt to replicate
 padding: 15px;
 width: 150px;
 height 60px;
@@ -110,11 +110,9 @@ background-color: #d32f2f;
    background-color: red;
 
 // & .activeButton{
-//    disabled = true; 
-//    backgroundColor = "blue";
-//    color = "white";
-//    // addButton.innerHTML = "ADDED!"
-//    cursor = "not-allowed";
+//    border: 3px solid blue;
+//    height: 300px;
+//    background-color: blue;
 // }
 }
 `
@@ -162,27 +160,26 @@ const ProductPage = () => {
       {dispatch(
          addProduct({...product, quantity, color, size})
        );
-      addButton.disabled = true; 
-      addButton.style.backgroundColor = "#d32f2f";
-      addButton.style.color = "white";
-      addButton.innerHTML = "ADDED!"
-      addButton.style.cursor = "not-allowed";
-         // addButton.className = "activeButton";
-         // console.log(addButton.className);
-      setTimeout(()=>{
-         addButton.disabled = false;
-         addButton.style.color = "white";
-         addButton.innerHTML = "ADD TO CART";
-         addButton.style.cursor = "pointer";
+                  addButton.disabled = true; 
+                  addButton.style.backgroundColor = "#d32f2f";
+                  addButton.style.color = "white";
+                  addButton.innerHTML = "ADDED!"
+                  addButton.style.cursor = "not-allowed";
+          //addButton.className = "activeButton";
+          //console.log(addButton.classList);
+                  setTimeout(()=>{
+                  addButton.disabled = false;
+                  addButton.style.color = "white";
+                  addButton.innerHTML = "ADD TO CART";
+                  addButton.style.cursor = "pointer";
          // addButton.className = "";
          // console.log(addButton.className);
-      }, 4000);
+                    }, 4000);
        //console.log({...product, quantity, color, size});
       } 
      else{alert("please pick a color AND size!"); 
           console.log(color + " " + size)}
    };
-
   
   return (
     <div>
