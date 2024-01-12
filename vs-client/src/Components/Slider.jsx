@@ -11,6 +11,7 @@ const Container = styled.div`
    align-items: center;
    position: relative;
    padding-bottom: 15px;
+   min-width: 375px;
 `
 const Wrapper = styled.div`
    height: 90%;
@@ -21,17 +22,13 @@ const Wrapper = styled.div`
    justify-content: flex-start;
    overflow:hidden;
    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
-   border: 5px solid green;
+   //border: 5px solid green;
    ` 
   const Slide = styled.div`
      min-width: 100%;
      height: 100%;
-     //display: flex;
-     //align-items: center;
-     //justify-content: center;
      transform: translateX(${(props) => props.slideIndex * -100}%); 
      transition: all 1s ease;
-     border: 3px solid yellow;
      position: relative;
   `
 
@@ -53,7 +50,7 @@ const TextWrapper = styled.div`
    justify-content: center;
    align-items: center;
    position: absolute;
-   top: 30%;
+   top: 25%;
    right: 10%;
    color: white;
    padding-left: 20px;
@@ -107,10 +104,6 @@ const P = styled.p`
 
 const Slider = () => {
    const [slideIndex, setSlideIndex] = useState(0);
-   //let autoSlideChange;
-   //commenting out the above line (initializing autoSlideChange) and setting a name for the below setTimeOut didn't work to resovle
-   //the issue. still going slideIndex 0, 0, 2, 0, 1, 2, 0, 1, 2, etc.  why the first two 0s???!?
-   //useEffect to change circle color when slideIndex changes
 
    useEffect(()=>{
       let circles = document.querySelectorAll(Circle);
@@ -137,25 +130,6 @@ const Slider = () => {
        };
    },[slideIndex])
 
-   //change slide every 8 seconds by updating slideIndex which will trigger useEffect with slideIndex dependency
-   /*const timerId = setTimeout(() => {
-      console.log(`begin setTimeout ${slideIndex}`);
-      let cur;
-      if (slideIndex < 2) {
-         cur = slideIndex + 1;
-      } else {
-         cur = 0;
-      }
-      setSlideIndex(cur);
-      //setSlideIndex(slideIndex=>slideIndex < 2 ? slideIndex + 1 : 0);
-      console.log(`end setTimeout ${slideIndex}, ${cur}`);
-   }, 4000);
-
-   
-   
-  const clearTimeouts = () => {
-   while(timerId--){clearTimeout(timerId)};
-  };*/
  
    const handleCircleClick = (circleNum) => {
       //clearInterval(interval);
@@ -173,25 +147,14 @@ const Slider = () => {
       // clearInterval(autoSlideChange);
       console.log(`end handleArrowClick ${slideIndex}`);
    }
-/* //moved code to anonymous function body of useEffect because setState within a 
-   //closure (function inside function) only has access to old state value kind of
-   //like an async function but with more limitations like cant use await or settimeout
-   const handleCircleColor = () =>{
-      let circles = document.querySelectorAll(Circle);
-      circles.forEach((value,index)=>{   
-         if(index === slideIndex){value.style.backgroundColor = "#d32f2f"}
-         else{value.style.backgroundColor = "black"}
-      }) 
-   }*/
- //style={{width: "100%", height: "auto"}}
 
 //  <ImgWrapper>
 //  {/* <Img src={item.img} alt={item.alt} /> // does not work as a styled component with props passed using .attrs for some reason*/}
-//  <img src={item.img} alt={item.alt} style={{objectFit: "cover",}}/>
+//  <img src={item.img} alt={item.alt} style={{objectFit: "cover",}}/>     REFACTORED TO TEXT ABSOLUTE POSITIONED OVER IMAGE SLIDE
 // </ImgWrapper>
 
 // <TextWrapper>
-//   <H1>{item.engTitle}</H1>
+//   <H1>{item.engTitle}</H1>    REFACTORED TO TEXT ABSOLUTE POSITIONED OVER IMAGE SLIDE
 //   <P>{item.engText}</P>
 // </TextWrapper>
   return (
@@ -202,7 +165,7 @@ const Slider = () => {
       <Wrapper>
          {slides.map((item)=> (
          <Slide slideIndex ={slideIndex}>
-            <img src={item.img} style={{objectFit: "cover",}} />
+            <img src={item.img} alt={item.alt} style={{objectFit: "cover",}} />
             <TextWrapper>
                <H1>{item.engTitle}</H1>
                <P>{item.engText}</P>

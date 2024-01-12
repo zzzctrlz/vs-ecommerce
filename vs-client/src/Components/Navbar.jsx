@@ -1,4 +1,4 @@
-import { Facebook, Instagram, SearchOutlined, ShoppingCartOutlined, Twitter } from "@mui/icons-material";
+import { Facebook, Instagram, ShoppingCartOutlined, Twitter } from "@mui/icons-material"; //SearchOutlined, took out search from navbar
 import { Badge } from "@mui/material";
 import styled from "styled-components";
 import logo from "../Assets/VietShietLogo500px.png";
@@ -29,7 +29,7 @@ const Left = styled.div`
    align-items: flex-start;
    justify-content: center;
    gap: 6px;
-   border: 1px solid green;
+   //border: 1px solid green;
 
    @media (max-width: 830px){
       display: none;
@@ -39,7 +39,7 @@ const Center = styled.div`
    flex: 1;
    display: flex;
    justify-content: center;
-   border: 1px solid white;
+   //border: 1px solid white;
 
    @media (max-width: 830px){
       justify-content: flex-start;
@@ -51,7 +51,7 @@ const Right = styled.div`
    display: flex;
    align-items: center;
    justify-content: flex-end;
-   border: 1px solid orange;
+   //border: 1px solid orange;
 `
 
 const RightExceptCart = styled.div`
@@ -121,11 +121,10 @@ color: #d32f2f;
 //}
 `
 const SocialIcons = styled.div`
-   //color: #d32f2f;
    display: flex;
    width: 166px;
    justify-content: space-between;
-   border: 1px solid white;
+   //border: 1px solid white;
 `
 const SIcon = styled.div`
    &:hover{
@@ -133,31 +132,31 @@ const SIcon = styled.div`
       cursor: pointer;
    }
 `
-const SearchWrapper = styled.div`
-   border: 0.5px solid #d32f2f;
-   display: flex;
-   align-items: center;
+// const SearchWrapper = styled.div`
+//    border: 0.5px solid #d32f2f;
+//    display: flex;
+//    align-items: center;
    
-`
-const Search = styled.input`
-   border: none;
-   background-color: black;
-   color: #d32f2f;
-   text-align: center;
-   font-size: 16px;
-   &:focus{
-      outline: none;
-   }
+// `
+// const Search = styled.input`
+//    border: none;
+//    background-color: black;
+//    color: #d32f2f;
+//    text-align: center;
+//    font-size: 16px;
+//    &:focus{
+//       outline: none;
+//    }
 
-   &::placeholder{
-      color: #d32f2f;
-      font-size: 14px;
-   }
+//    &::placeholder{
+//       color: #d32f2f;
+//       font-size: 14px;
+//    }
    
-   &:focus::placeholder{
-      color: transparent;
-   }
-`
+//    &:focus::placeholder{
+//       color: transparent;
+//    }
+// `
 
 const SLink = styled(Link)`
 text-decoration: none;
@@ -200,7 +199,7 @@ const Navbar = () => {
             </SocialIcons>
          </Left>
          <Center>
-            <img src={logo} alt="viet shiet logo" width="77px" height="77px" />
+            <SLink to={`/`}><img src={logo} alt="viet shiet logo" width="77px" height="77px" /></SLink>
          </Center>
          <Right>
             {/*<RightItem>

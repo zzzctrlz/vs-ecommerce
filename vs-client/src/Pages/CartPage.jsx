@@ -43,10 +43,10 @@ const Wrapper1 = styled.div`
    align-items: center;
    justify-content: flex-start;
    min-height: 600px;
-   min-width: 400px;
+   min-width: 370px;
    //width: 100%;
    padding: 20px;
-   border: 2px solid yellow;
+   //border: 2px solid yellow;
 `
 
 const Wrapper2 = styled.div`
@@ -56,7 +56,7 @@ const Wrapper2 = styled.div`
    justify-content: flex-start;
    align-items: center;
    padding: 20px;
-   border: 1px solid blue;
+   //border: 1px solid blue;
 `
 
 const Wrapper2Inner = styled.div`
@@ -93,7 +93,7 @@ const Product = styled.div`
    width: 100%;
    padding: 50px 0px;
    border-bottom: 2px solid red;
-   border: 1px solid blue;
+   //border: 1px solid blue;
    position: relative; //added so can place absolute remove button (absolute pos. needs a relative pos. parent)
 `
 const ProductDetails = styled.div`
@@ -102,7 +102,7 @@ const ProductDetails = styled.div`
    align-items: center;
    flex-direction: column;
    flex: 2;
-   border: 1px solid red;
+   //border: 1px solid red;
 `
 //const DetailBox= styled.div`
 //0 border: 1px solid black;
@@ -136,7 +136,8 @@ const PriceDetails = styled.div`
    justify-content: center;
    align-items: center;
    flex: 1;
-   border: 1px solid green;
+   margin-top: 10px;
+   //border: 1px solid green;
 
 `
 const Quantity = styled.div`
@@ -297,7 +298,16 @@ const CartPage = () => {
                   <p>Shipping: ${shipping}</p>
                   <br/>
                   <Total>Total: ${(Number(subtotal) + Number(tax) + Number(shipping)).toFixed(2)}</Total>
-                  <Button className="big">CHECKOUT</Button>
+                  <StripeCheckout
+                     name="Viet Shop"
+                     image="https://i.imgur.com/t1oZ1QO.png"
+                     billingAddress
+                     shippingAddress
+                     description={`Your total is $${cart.total}`}
+                     amount={cart.total * 100}
+                     token={onToken}
+                     stripeKey={KEY}
+                  ><Button className="big">CHECKOUT</Button></StripeCheckout>
                   {/*<Uwrapper></Uwrapper>*/}
                </Wrapper2Inner>
             </Wrapper2>

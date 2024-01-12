@@ -1,6 +1,7 @@
 //import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
+import { Facebook, Instagram, Twitter } from "@mui/icons-material";
 
 const Container = styled.div`
    display: flex;
@@ -9,12 +10,9 @@ const Container = styled.div`
    justify-content: space-around;
    align-items: flex-start;
    height: auto;
-   padding: 15px 0;
+   padding: 25px 0;
 `
-const LeftCol = styled.div`
-   display: flex;   
-   flex-direction: column;
-`
+
 const MidCol = styled.div`
    display: flex;
    flex-direction: column;
@@ -25,22 +23,46 @@ const RightCol = styled.div`
    flex-direction: column;
 `
 const Title = styled.h1`
-   font-size: 30px;
+   font-size: 24px;
    font-weight: 400;
-   margin-bottom: 10px;
+   margin-bottom: 5px;
+
+   @media(max-width: 600px){
+      font-size: 20px;
+   }
 `
 const Li = styled.li`
    list-style: none;
    margin-top: 8px;
-   `
-const A = styled.a`
-   color: #424242;
-   text-decoration: none;
-   
-   &:hover{
-      color: #d32f2f;
+   @media(max-width: 600px){
+      font-size: 14px;
    }
+   `
+
+   
+const A = styled.a`
+color: #424242;
+text-decoration: none;
+&:hover{
+   color: #d32f2f;
+}
 ` 
+
+const LeftCol = styled.div`
+   display: flex;   
+   flex-direction: column;
+
+   ul{
+      ${Li}{
+
+         ${A}{
+            text-decoration: line-through;
+            cursor: not-allowed;
+         }
+      }
+   }
+`
+
 const SLink = styled(Link)`
    text-decoration: none;
    color: #424242;
@@ -51,8 +73,26 @@ const SLink = styled(Link)`
 `
 
 const P = styled.p`
-   font-size: 14px;
+   font-size: 12px;
    margin-top: -5px;
+`
+
+
+const SocialIcons = styled.div`
+   display: flex;
+   width: 166px;
+   justify-content: space-between;
+   //border: 1px solid white;
+
+   @media(max-width:700px){
+      width: 100px;
+   }
+`
+const SIcon = styled.div`
+   &:hover{
+      color: #d32f2f;
+      cursor: pointer;
+   }
 `
 
 const FooterLinks = () => {
@@ -61,7 +101,6 @@ const FooterLinks = () => {
       <Container>
          <LeftCol>
             <Title>Content <P>(coming soon!)</P></Title>
-            <hr/>
             <br/>
             <ul>
                <Li><A href="#">Articles</A></Li>
@@ -71,8 +110,7 @@ const FooterLinks = () => {
             </ul>
          </LeftCol>
          <MidCol>
-            <Title>Merch</Title>
-            <hr/>
+            <Title>Merch<P>&nbsp;</P></Title>
             <br/>
             <ul>
                <Li><SLink to={`/products/shirt`}>Tshirts</SLink></Li>
@@ -82,13 +120,16 @@ const FooterLinks = () => {
             </ul>
          </MidCol>
          <RightCol>
-            <Title>Contact</Title>
-            <hr/>
+            <Title>Contact<P>&nbsp;</P></Title>
             <br/>
             <ul>
                <Li><A href="#">Email</A></Li>
                <Li><A href="#">Phone</A></Li>
-               <Li><A href="#">Social</A></Li>
+               <Li><SocialIcons>
+                     <A href="https://www.facebook.com/VietShiet" target="_blank"><SIcon><Facebook /></SIcon></A>
+                     <A href="https://www.instagram.com/viet_shiet/" target="_blank"><SIcon><Instagram /></SIcon></A>
+                     <A href="https://twitter.com/VietShiet" target="_blank"><SIcon><Twitter /></SIcon></A>
+                  </SocialIcons></Li>
                {/* <Li><A href="#">Payment Icons</A></Li> */}
             </ul>
          </RightCol>
