@@ -19,9 +19,9 @@ const Container = styled.div`
 `
 
 const Wrapper = styled.div`
-   width: 30%;
+   width: max(275px, 30%);
    padding: 40px;
-   background-color: white;
+   background-color: rgba(255, 255, 255, 0.5);
    margin-right: 10%;
 `
 const Title = styled.h1`
@@ -34,9 +34,10 @@ const Form = styled.form`
 `
 const Input = styled.input`
    flex: 1;
-   min-width: 43%;
+   width: clamp(150px, 43%, 500px);
    margin: 20px 13px 0 0;
    padding: 13px;
+   
 `
 const Button = styled.button`
    width: 100%;

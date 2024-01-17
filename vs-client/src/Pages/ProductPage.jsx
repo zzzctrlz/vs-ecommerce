@@ -19,6 +19,12 @@ const Wrapper=styled.div`
    display: flex;
    padding: 50px;
    flex-wrap: wrap;
+   min-width: 375px;
+   box-sizing: border-box;
+
+   @media(max-width: 850px){
+      padding: 50px 0px;
+   }
 `
 const ImgContainer=styled.div`
    flex: 1;
@@ -30,33 +36,36 @@ const ImgContainer=styled.div`
    box-sizing: border-box;
    padding: 40px;
    flex-basis: 50%;
-   min-width: 400px;
+   min-width: 350px;
 `
 const Img=styled.img`
-   width: clamp(350px, 90%, 1000px);
+   width: clamp(300px, 90%, 1000px);
    object-fit: contain;
    
 
 `
 const InfoContainer=styled.div`
    flex: 1;
-   padding: 20px 123px;
+   padding: 20px 20px; //20 123
    display: flex; 
    flex-direction: column;
    justify-content: center;
    align-items: flex-start;
    gap: 30px;
    border: 1px solid black;
-   box-sizing: border-box; 
+   //box-sizing: border-box; 
    //didn't make a difference on padding taking more room???
    flex-basis: 50%;
-   min-width: 400px;
+   min-width: 350px;
 `
 const FiltersContainer=styled.div`
    display: flex;
+   flex-wrap: wrap;
    justify-content: flex-start;
    gap: 30px;
    align-items: center;
+   min-width: 205px;
+   border: 1px solid green;
 
 `
 const SizeFilter=styled.select`

@@ -44,7 +44,7 @@ const ImgDetailDivThree = styled.div`
 display: flex;
 justify-content: center;
 font-size: 16px;
-color: #d32f2f;
+color: black;
 `
 const SLink = styled(Link)`
 text-decoration: none;

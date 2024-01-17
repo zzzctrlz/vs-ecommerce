@@ -88,7 +88,7 @@ const Newsletter = () => {
       <H1>Newsletter!</H1>
       <P>Sign up for updates on content and products!</P>
       <InputContainer>
-         <Input type="text" onChange={(e)=>setEmail(e.target.value)} />
+         <Input type="email" onChange={(e)=>setEmail(e.target.value)} />
          <Button onClick = {()=> handleAddEmail()}><Send /></Button>
       </InputContainer>
       <NLConfirm id="confirm">Thanks for joining our newsletter!</NLConfirm>
