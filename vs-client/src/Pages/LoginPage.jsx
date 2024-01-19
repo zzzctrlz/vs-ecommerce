@@ -1,11 +1,12 @@
 import styled from "styled-components"
 import {Link} from "react-router-dom"
-import { useState} from "react";
+import { useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {login} from "../Redux/apiCalls";
+import { resetError } from "../Redux/userSlice";
 
 const Container = styled.div`
-   height: 100vh;
+   height: max(500px, 100vh);
    width: 100%;
    background: linear-gradient(
       rgba(255, 255, 255, 0.3),
@@ -63,13 +64,17 @@ const LoginPage = () => {
       login(dispatch, {username, password});
    };
 
+   useEffect(()=>{
+      dispatch(resetError())
+   }, [dispatch]);
+
   return (
     <div>
       <Container>
          <Wrapper>
             <Title>WELCOME BACK!</Title>
             <Form>
-               <Input placeholder='Email' 
+               <Input placeholder='Username' 
                       onChange={(e)=> setUsername(e.target.value)}
                />
                <Input placeholder='Password' 
@@ -79,7 +84,7 @@ const LoginPage = () => {
                <Button onClick={handleClick} disabled={isFetching}>
                   LOG IN
                </Button>
-               {error && <span style={{color: "red", marginTop: "10px"}}>{error}</span>}
+               {error && <p style={{color: "red",}}>Error! Incorrect email or password! </p>}
                <p>Don't have an account? <Link to={'/register'}>Register here!</Link></p>
             </Form>
          </Wrapper>

@@ -6,7 +6,7 @@ import { register } from "../Redux/apiCalls";
 
 
 const Container = styled.div`
-   height: 100vh;
+   height: max(600px, 100vh);
    width: 100%;
    background: linear-gradient(
       rgba(255, 255, 255, 0.3),
@@ -17,13 +17,14 @@ const Container = styled.div`
    display: flex;
    align-items: center;
    justify-content: center;
+   padding: 30px 0;
 `
 
 const Wrapper = styled.div`
 width: max(250px, 43%);
 height: auto;
-   padding: 20px;
-   background-color: white;
+padding: 20px;
+background-color: rgba(255, 255, 255, 0.8);
 `
 const Title = styled.h1`
    font-size: 25px;
@@ -98,16 +99,19 @@ const RegisterPage = () => {
                         required
                      />
                      <Input placeholder='Email'
+                        type="email"
                         onChange={e => setEmail(e.target.value)}
                         required
                      />
                   </EmailsDiv>
                   <PasswordsDiv>
                      <Input placeholder='Password'
+                        type="password"
                         onChange={e => setFirstpassword(e.target.value)}
                         required
                      />
                      <Input placeholder='Confirm Password'
+                        type='password'
                         onChange={(e) => setPassword(e.target.value)}
                         required
                      />

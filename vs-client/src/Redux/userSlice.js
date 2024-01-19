@@ -11,6 +11,7 @@ const userSlice = createSlice({
    //will use loginStart/Success/Error for register too
    reducers: {
       loginStart: (state)=>{
+         state.error = false;
          state.isFetching = true;
       },
       loginSuccess: (state, action)=>{
@@ -27,8 +28,11 @@ const userSlice = createSlice({
       addEmail: (state, action)=>{
          state.emailArray.push(action.payload);
       },
+      resetError: (state)=>{
+         state.error = false;
+      }
    },
 });
 
-export const {loginStart, loginSuccess, loginError, signOut, addEmail} = userSlice.actions;
+export const {loginStart, loginSuccess, loginError, signOut, addEmail, resetError} = userSlice.actions;
 export default userSlice.reducer;
