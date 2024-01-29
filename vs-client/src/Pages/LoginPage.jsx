@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import { useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {login} from "../Redux/apiCalls";
@@ -57,7 +57,8 @@ const LoginPage = () => {
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
    const dispatch = useDispatch();
-   const {isFetching, error} = useSelector(state => state.user); //user is from store.js
+   const navigate = useNavigate();
+   const {isFetching, error, currentUser} = useSelector(state => state.user); //user is from store.js
 
    const handleClick = (e) => {
       e.preventDefault();
@@ -67,6 +68,13 @@ const LoginPage = () => {
    useEffect(()=>{
       dispatch(resetError())
    }, [dispatch]);
+
+   useEffect(()=>
+   {
+      if(currentUser){
+         navigate("/success")
+      }
+   }, [navigate, currentUser])
 
   return (
     <div>

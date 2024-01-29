@@ -59,43 +59,43 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 
-@media (max-width: 444px){
-   display: none;
-}
+// @media (max-width: 444px){
+//    display: none;
+// }
 `
-const BurgerMenu = styled.div`
-//display: flex;
-flex-direction: column;
-//justify-content: space-around:       ALSO FIXED BY SETTING CHILD DIVS TO MARGIN AUTO?? thought was just horizontal centering???
-//align-items: center;        FIXED BY SETTING CHILD DIVS TO MARGIN:AUTO
-height: 35px; 
-width: 35px;
-border: 2px solid #d32f2f;
-cursor: pointer;
-display: none;
-margin-left: 20px;
+// const BurgerMenu = styled.div`
+// //display: flex;
+// flex-direction: column;
+// //justify-content: space-around:       ALSO FIXED BY SETTING CHILD DIVS TO MARGIN AUTO?? thought was just horizontal centering???
+// //align-items: center;        FIXED BY SETTING CHILD DIVS TO MARGIN:AUTO
+// height: 35px; 
+// width: 35px;
+// border: 2px solid #d32f2f;
+// cursor: pointer;
+// display: none;
+// margin-left: 20px;
 
 
-&:hover{
-   border: 2px solid white;
-}
+// &:hover{
+//    border: 2px solid white;
+// }
 
-&:hover div{
-   background-color: white;
-}
+// &:hover div{
+//    background-color: white;
+// }
 
-@media (max-width: 444px){
-   display: flex;
-}
-`
+// @media (max-width: 444px){
+//    display: flex;
+// }
+// `
 
-const BurgerLine = styled.div`
-   width: 25px;
-   height: 4px;
-   background-color: #d32f2f;
-   //border: 1px solid black;
-   margin: auto;
-`
+// const BurgerLine = styled.div`
+//    width: 25px;
+//    height: 4px;
+//    background-color: #d32f2f;
+//    //border: 1px solid black;
+//    margin: auto;
+// `
 
 const Title = styled.h1`
   // color: #d32f2f;
@@ -111,6 +111,10 @@ const RightItem = styled.div`
 
    &:hover{
       color: white;
+   }
+
+   @media(max-width: 550px){
+      margin-left: 20px;
    }
 `
 const A = styled.a`
@@ -223,12 +227,11 @@ const Navbar = () => {
                   </Badge>
                </RightItem>
             </SLink>
-
-            <BurgerMenu>
+           {/* <BurgerMenu>
                   <BurgerLine></BurgerLine>
                   <BurgerLine></BurgerLine>
                   <BurgerLine></BurgerLine>
-            </BurgerMenu>
+         </BurgerMenu> */}
          </Right>
       </Wrapper>
 

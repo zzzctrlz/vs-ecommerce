@@ -4,6 +4,7 @@ import FooterLinks from "../Components/FooterLinks"
 import Navbar from "../Components/Navbar"
 import Newsletter from "../Components/Newsletter"
 import Slider from "../Components/Slider"
+import PopularItems from "../Components/PopularItems"
 
 
 
@@ -13,6 +14,7 @@ const HomePage = () => {
       <Announcement />
       <Navbar />
       <Slider />
+      <PopularItems />
       <Newsletter />
       <FooterLinks />
       <Copyright />

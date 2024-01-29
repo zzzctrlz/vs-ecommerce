@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate} from "react-router-dom";
+import { useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../Redux/apiCalls";
 
@@ -75,7 +75,8 @@ const RegisterPage = () => {
    const [email, setEmail] = useState("");
    const [passError, setPasserror] = useState(false);
    const dispatch = useDispatch();
-   const { isFetching, error } = useSelector(state => state.user);
+   const navigate = useNavigate();
+   const { isFetching, error, currentUser } = useSelector(state => state.user);
 
    const handleClick = (e) => {
       e.preventDefault();
@@ -86,6 +87,13 @@ const RegisterPage = () => {
       }
       else { setPasserror(true) };
    }
+
+   useEffect(()=>
+   {
+      if(currentUser){
+         navigate("/success")
+      }
+   }, [navigate, currentUser])
 
    return (
       <div>

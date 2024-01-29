@@ -14,26 +14,28 @@ import{
    Navigate,
 } from "react-router-dom";
 
-import {useSelector} from "react-redux";
+//import {useSelector} from "react-redux";
 //import { NavigateBefore } from '@mui/icons-material';
 
 
 
 
 const App = () => {
-   const user = useSelector((state)=>state.user.currentUser);
+  // const user = useSelector((state)=>state.user.currentUser);
   //const user = null;
+  //user ? <Navigate to="/" replace /> :  TAKEN OUT SO I CAN REDIRECT FROM LOGIN/REGISTER TO SUCCESS PAGE
+  //user ? <Navigate to="/" replace /> : 
   return (
       <BrowserRouter>
          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="register" element={user ? <Navigate to="/" replace /> : <RegisterPage />} />
-            <Route path="login" element={user ? <Navigate to="/" replace /> : <LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
             <Route path="about" element={<AboutPage />} />
+            <Route path="login" element={<LoginPage />} />
             <Route path="products/:category?" element={<ProductsPage />} />
             <Route path="product/:id" element={<ProductPage />} />
             <Route path="cart" element={<CartPage />} />
             <Route path="success" element={<SuccessPage />} />
+            <Route exact path="/" element={<HomePage />} />
          </Routes>
       </BrowserRouter> 
   );

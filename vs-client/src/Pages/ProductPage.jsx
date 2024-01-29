@@ -65,8 +65,6 @@ const FiltersContainer=styled.div`
    gap: 30px;
    align-items: center;
    min-width: 205px;
-   border: 1px solid green;
-
 `
 const SizeFilter=styled.select`
    

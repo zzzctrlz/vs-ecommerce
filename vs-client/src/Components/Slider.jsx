@@ -65,7 +65,7 @@ const CircleContainer = styled.div`
    align-items: center;
    gap: 40px;
    position: absolute;
-   bottom: 20px;
+   bottom: 10px;
 `
 const Circle = styled.div`
    border-radius: 50%;

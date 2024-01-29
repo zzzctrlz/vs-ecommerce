@@ -11,6 +11,7 @@ const Container = styled.div`
    align-items: flex-start;
    height: auto;
    padding: 25px 0;
+
 `
 
 const MidCol = styled.div`
