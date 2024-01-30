@@ -35,7 +35,7 @@ return (
         <ImgDiv>
             <SLink to={`/products/shirt`} title="shirts" alt="gorilla t-shirt"><Img src="https://i.imgur.com/bIhYcCC.png" /></SLink>
             <SLink to={`/products/hat`} title="hats" alt="bamboo hat"><Img src="https://i.imgur.com/2sDwclg.png" /></SLink>
-            <SLink to={`/products/pat`} title="patches" alt="pho patch"><Img src="https://i.imgur.com/wozR5E8.png" /></SLink>
+            <SLink to={`/products/patch`} title="patches" alt="pho patch"><Img src="https://i.imgur.com/wozR5E8.png" /></SLink>
         </ImgDiv>
     </Wrapper>
 )
