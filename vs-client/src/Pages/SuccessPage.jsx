@@ -1,17 +1,21 @@
 import {useNavigate} from "react-router-dom";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {clearCart } from "../Redux/cartSlice";
 import styled from "styled-components";
 
 
 const SuccessPage = ()=>{
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(()=> {
+   dispatch(clearCart());
    setTimeout(()=>{
       // console.log("inside redirectToHome");
       navigate("/");
-   }, 8000);
-  }, [navigate]);
+   }, 4000);
+  }, [dispatch, navigate]);
 
   const Container = styled.div`
    height: max(600px, 100vh);

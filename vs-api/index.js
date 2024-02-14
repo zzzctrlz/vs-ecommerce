@@ -13,14 +13,17 @@ const stripeRoute = require("./routes/stripeRoute");
 
 //initialize
 const app = express();
-app.use(express.json()); //allows post requests using JSON
-dotenv.config();
-mongoose.connect(process.env.MONGODB_URL)
-   .then(()=> {console.log('db connection succesful')})
-   .catch((err)=> {console.log(err)});
-
+app.use(express.json()); //allows parsing post requests using JSON
+app.use(express.urlencoded({extended: false})); //parse url encoded bodies
 app.use(cors());   
 app.listen(process.env.PORT || 5000, ()=> {console.log('backend server is running')});
+
+dotenv.config();
+
+mongoose.connect(process.env.MONGODB_URL)
+   .then(()=> {console.log('db connection successful')})
+   .catch((err)=> {console.log(err)});
+
 
 //declare routes
    app.use("/api/auth", authRoute);

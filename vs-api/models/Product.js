@@ -10,6 +10,7 @@ const ProductSchema = new mongoose.Schema(
       price:{type:Number, required:true},
       inStock: {type: Boolean, default: true},
       cat: {type:Array},
+      stripeId: {type:String, required:true, unique:true},
    },
    {timestamps: true}
 );
@@ -23,7 +24,8 @@ const ProductSchema = new mongoose.Schema(
 "color": ["red", "black", "white"],
 "price": 20,
 "inStock": true,
-"cat": ["men", "women", "other", "child"]
+"cat": ["men", "women", "other", "child"],
+stripeId: ""
 }
 */
 module.exports = mongoose.model("Product", ProductSchema);

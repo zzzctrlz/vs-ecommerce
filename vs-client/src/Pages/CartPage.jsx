@@ -11,19 +11,12 @@ import { Remove, Add } from "@mui/icons-material"
 
 //React/Router/Axios/Redux/Stripe imports
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { userRequest } from "../requests";
+import { Link } from "react-router-dom";
+//import { userRequest } from "../requests";
 import { useSelector, useDispatch } from "react-redux";
-import StripeCheckout from "react-stripe-checkout";
 import { increaseQuantity, decreaseQuantity, deleteProduct, clearCart } from "../Redux/cartSlice";
 
 //import {useHistory } from "react-router"; legacy. change to useNavigate
-
-const KEY = "pk_test_51MZNj8KBBl0FI90RtwddiNG0UKzSJdM0snYnmklKZrXPA4PpJ7fhwykFWsoztKD1L7H52LKeU8GWaFekyomHGjrc00eEYm4Zf5";
-//got notification about missing KEY when pressing checkout button so trying moving const declaration into component body
-//moving into component body still yielded missing key alert ??
-//maybe from the missing API secret key for the Stripe routing?
-//probably just because it's in demo mode???
 
 
 const Container = styled.div`
@@ -128,9 +121,7 @@ const ProductSize = styled.p`
 const ProductColor = styled.p`
 
 `
-const ProductId = styled.p`
 
-`
 const PriceDetails = styled.div`
    display: flex;
    justify-content: center;
@@ -184,9 +175,7 @@ const Button = styled.button.attrs(props =>({className: props.className,}))`
        width: 100%;
     }
 `
-const Uwrapper = styled.div`
-   font-size: 30px;
-`
+
 const SLink = styled(Link)`
    text-decoration: none;
    color: white;
@@ -196,37 +185,25 @@ const SLink = styled(Link)`
 const CartPage = () => {
 
    const cart = useSelector((state) => state.cart);
+   
+   
    const dispatch = useDispatch();
-   const [stripeToken, setStripeToken] = useState(null);
-   // const KEY = process.env.PUB_STRIPE_KEY; even after moving key to inside component body, getting alert of missing key when pressing checkout button
    // const history = useHistory();
-   const navigate = useNavigate();
-
-   const onToken = (token) => {
-      setStripeToken(token);
-   };
-
+   //const navigate = useNavigate();
+   
    let tax = (cart.total * 0.1).toFixed(2);
    let shipping = (cart.total < 50 ? 10 : 0).toFixed(2);
    let subtotal = (cart.total).toFixed(2);
    
+   const [lineItems, setLineItems] = useState([]);
+   console.log(lineItems);
    
    useEffect(() => {
-      const makePayRequest = async () => {
-         try {
-            console.log('inside makePayRequest');
-            const res = await userRequest.post("/checkout/payment", {
-               tokenId: stripeToken.id,
-               amount: 100,
-            });
-            navigate.push("/success", {
-               stripeData: res.data,
-               products: cart,
-            });
-         } catch { }
-      };
-      stripeToken && makePayRequest();
-   }, [stripeToken, cart.total,]);
+      let stripeItems = cart.products.map((product) => ({price: product.stripeId, quantity: product.quantity}));
+      setLineItems(stripeItems);
+      //console.log(`lineitems: ${stripeItems}`);
+      //console.log(cart.products);
+   }, [cart]);
 
 
    const handleX = (index) => {
@@ -253,18 +230,9 @@ const CartPage = () => {
                <ButtonContainer>
                   <Button><SLink to={`/products`}>Keep Shopping</SLink></Button>
                   <Button onClick={handleClearCart}>Clear Cart</Button>
-                  <StripeCheckout
-                     name="Viet Shop"
-                     image="https://i.imgur.com/t1oZ1QO.png"
-                     billingAddress
-                     shippingAddress
-                     description={`Your total is $${cart.total}`}
-                     amount={cart.total * 100}
-                     token={onToken}
-                     stripeKey={KEY}
-                  >
+                  
                      <Button>CHECKOUT</Button>
-                  </StripeCheckout>
+                 
                </ButtonContainer>
                {cart.products.map((product, index) => (
                   <Product key={index}>
@@ -298,17 +266,10 @@ const CartPage = () => {
                   <p>Shipping: ${shipping}</p>
                   <br/>
                   <Total>Total: ${(Number(subtotal) + Number(tax) + Number(shipping)).toFixed(2)}</Total>
-                  <StripeCheckout
-                     name="Viet Shop"
-                     image="https://i.imgur.com/t1oZ1QO.png"
-                     billingAddress
-                     shippingAddress
-                     description={`Your total is $${cart.total}`}
-                     amount={cart.total * 100}
-                     token={onToken}
-                     stripeKey={KEY}
-                  ><Button className="big">CHECKOUT</Button></StripeCheckout>
-                  {/*<Uwrapper></Uwrapper>*/}
+                 <form action="http://localhost:5000/api/checkout/create-checkout-session" method="POST">
+                     <input type="hidden" name="cartArray" value= {JSON.stringify(lineItems)} />
+                     <Button className="big" type="submit">CHECKOUT</Button>
+                 </form>
                </Wrapper2Inner>
             </Wrapper2>
          </WrapperWrapper>
